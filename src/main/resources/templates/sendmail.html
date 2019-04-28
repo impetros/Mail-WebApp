@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css"
           th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
 
-    <title>Registration</title>
+    <title>Send Mail</title>
 </head>
-<body>
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -29,27 +28,17 @@
             <ul class="nav navbar-nav">
                 <li sec:authorize="isAuthenticated()"><a th:href="@{/sendmail}">Send a mail</a></li>
                 <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
-
             </ul>
         </div>
     </div>
 </nav>
-
-<br>
-<br>
-<div class="container">
-    <h2>User Registration and Login Module using Spring Boot, Spring
-        MVC, Spring Security, JPA/Hibernate and Thymeleaf</h2>
-
-    <p>
-        Welcome <span sec:authentication="principal.username">User</span>
-    </p>
-</div>
-
-<script type="text/javascript"
-        th:src="@{/webjars/jquery/3.2.1/jquery.min.js/}"></script>
-<script type="text/javascript"
-        th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
-
+<!--<br>-->
+<body>
+<div>
+    <br>
+    <h1>Send a mail</h1>
+    <div class="container">
+    </div>
+    </div>
 </body>
 </html>

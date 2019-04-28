@@ -6,9 +6,11 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 import com.petros.mailapplication.dto.UserRegistrationDto;
+import com.petros.mailapplication.model.Mail;
 import com.petros.mailapplication.model.Role;
 import com.petros.mailapplication.model.User;
 import com.petros.mailapplication.repository.UserRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -32,11 +34,13 @@ public class UserServiceImpl implements UserService {
 
     public User save(UserRegistrationDto registration) {
         User user = new User();
-        user.setFirstName(registration.getFirstName());
-        user.setLastName(registration.getLastName());
-        user.setEmail(registration.getEmail());
+//        user.setFirstName(registration.getFirstName());
+//        user.setLastName(registration.getLastName());
+//        user.setEmail(registration.getEmail());
+        BeanUtils.copyProperties(registration,user);
         user.setPassword(passwordEncoder.encode(registration.getPassword()));
         user.setRoles(Arrays.asList(new Role("ROLE_USER")));
+        user.setMails(Arrays.asList(new Mail("nimic@gmail.com","text")));
         return userRepository.save(user);
     }
 

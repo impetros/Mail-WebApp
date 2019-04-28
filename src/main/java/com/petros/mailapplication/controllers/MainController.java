@@ -22,4 +22,7 @@ public class MainController {
     public String userIndex() {
         return "user/index";
     }
+
+    @GetMapping("/sendmail")
+    public String sendMail(){ return "sendmail";}
 }

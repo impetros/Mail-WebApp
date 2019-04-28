@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,600');
+body{
+    margin:0;
+    font-family: 'Montserrat',sans-serif;
+    /*background-image: url("/static/images/login.jpg");*/
+}
+
+.container{
+    text-align: center;
+    padding: .8em 1.2em;
+}
+
+h1{
+    font-size: 3.0em;
+    color:black;
+}
+
