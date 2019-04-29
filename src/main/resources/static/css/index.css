@@ -3,7 +3,7 @@
 body{
     margin:0;
     font-family: 'Montserrat',sans-serif;
-    background-image: url("https://images.pexels.com/photos/1509534/pexels-photo-1509534.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260") ;
+    background-image: url("https://wallpaper.wiki/wp-content/uploads/2017/05/Solid-Dark-Navy-Blue-Wallpaper.png") ;
     background-repeat: no-repeat;
     background-position: right top;
     background-attachment: fixed;
@@ -23,8 +23,18 @@ body{
     margin:0;
     padding: 0;
 }
-.collapse .navbar-collapse{
-    padding: 1em 4em 0;
+.row{
+    background-color: white;
+    width: 1000px;
+    position: center;
+    margin: 12em 0 0 35em;
+    border-radius: 30%;
+    padding:1em 1em 1em 1em;
+    text-align: center;
+}
+.nav{
+    position: center;
+    padding: 1em 0 ;
 }
 
 

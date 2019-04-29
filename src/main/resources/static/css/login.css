@@ -12,6 +12,7 @@ body{
 .container{
     text-align: center;
     padding: .8em 1.2em;
+
 }
 
 h1{
@@ -46,8 +47,9 @@ h1{
     background-color: white;
     width: 600px;
     position: center;
-    margin: 12em 0 0 20em;
+    margin: 20em 0 0 20em;
     border-radius: 10%;
+
 }
 
 .form-group{
@@ -56,4 +58,5 @@ h1{
 
 .col-sm-6 .col-sm-offset-3{
     padding: 0 0 0 5em;
+    margin: 0;
 }
