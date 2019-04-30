@@ -5,6 +5,7 @@ import org.springframework.format.datetime.standard.DateTimeFormatterFactory;
 import javax.persistence.*;
 
 @Entity
+@Table(name="mails")
 public class Mail {
 
     @Id

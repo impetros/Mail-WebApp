@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = "email"))
+@Table(name="users")
 public class User {
 
     @Id

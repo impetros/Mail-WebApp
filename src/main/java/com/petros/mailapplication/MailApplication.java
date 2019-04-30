@@ -27,12 +27,12 @@ public class MailApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
 //        UserRegistrationDto userRegistrationDto=new UserRegistrationDto();
-//        userRegistrationDto.setFirstName("Cont");
-//        userRegistrationDto.setLastName("Degeaba");
+//        userRegistrationDto.setFirstName("Cont2");
+//        userRegistrationDto.setLastName("Degeaba2");
 //        userRegistrationDto.setPassword("a!234567");
 //        userRegistrationDto.setConfirmPassword("a!234567");
-//        userRegistrationDto.setConfirmEmail("alina@gmail.com");
-//        userRegistrationDto.setEmail("alina@gmail.com");
+//        userRegistrationDto.setConfirmEmail("dj_smash46@yahoo.com");
+//        userRegistrationDto.setEmail("dj_smash46@yahoo.com");
 //        userRegistrationDto.setTerms(true);
 //        userService.save(userRegistrationDto);
     }
