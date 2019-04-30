@@ -1,7 +1,5 @@
 package com.petros.mailapplication.model;
 
-import org.springframework.format.datetime.standard.DateTimeFormatterFactory;
-
 import javax.persistence.*;
 
 @Entity
@@ -16,14 +14,16 @@ public class Mail {
 //    @JoinColumn(name="fk_id")
     private User user;
 
-    private String destination;
+    private String subject;
+    private String from;
     private String text;
 
     public Mail() {
     }
 
-    public Mail(String destination, String text) {
-        this.destination = destination;
+    public Mail(String destination,String subject, String text) {
+        this.from = destination;
+        this.subject=subject;
         this.text = text;
     }
 
@@ -36,12 +36,12 @@ public class Mail {
     }
 
 
-    public String getDestination() {
-        return destination;
+    public String getFrom() {
+        return from;
     }
 
-    public void setDestination(String destination) {
-        this.destination = destination;
+    public void setFrom(String from) {
+        this.from = from;
     }
 
     public String getText() {
@@ -52,11 +52,19 @@ public class Mail {
         this.text = text;
     }
 
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
     @Override
     public String toString() {
         return "Mail{" +
                 "id=" + id +
-                ", destination='" + destination + '\'' +
+                ", from='" + from + '\'' +
                 ", text='" + text + '\'' +
                 '}';
     }

@@ -3,6 +3,7 @@ package com.petros.mailapplication.service;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import com.petros.mailapplication.dto.UserRegistrationDto;
@@ -34,15 +35,17 @@ public class UserServiceImpl implements UserService {
 
     public User save(UserRegistrationDto registration) {
         User user = new User();
-//        user.setFirstName(registration.getFirstName());
-//        user.setLastName(registration.getLastName());
-//        user.setEmail(registration.getEmail());
         BeanUtils.copyProperties(registration,user);
         user.setPassword(passwordEncoder.encode(registration.getPassword()));
         user.setRoles(Arrays.asList(new Role("ROLE_USER")));
-        user.setMails(Arrays.asList(new Mail("nimic@gmail.com","text")));
+//        user.setMails(Arrays.asList(new Mail("nimic@gmail.com","text")));
         return userRepository.save(user);
     }
+
+    public void addMails(String email, List<Mail> mails){
+         userRepository.findByEmail(email).setMails(mails);
+    }
+
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -54,6 +57,9 @@ public class UserServiceImpl implements UserService {
                 user.getPassword(),
                 mapRolesToAuthorities(user.getRoles()));
     }
+
+
+
 
     private Collection < ? extends GrantedAuthority> mapRolesToAuthorities(Collection < Role > roles) {
         return roles.stream()

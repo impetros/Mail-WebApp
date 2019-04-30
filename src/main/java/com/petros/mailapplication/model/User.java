@@ -27,7 +27,8 @@ public class User {
                     name = "role_id", referencedColumnName = "id"))
     private Collection < Role > roles;
 
-    @OneToMany(mappedBy = "user")
+    ///(mappedBy = "user")
+    @OneToMany//(mappedBy = "user")
     private List<Mail > mails;
 
     public User() {}

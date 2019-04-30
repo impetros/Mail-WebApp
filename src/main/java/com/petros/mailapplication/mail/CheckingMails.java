@@ -1,5 +1,9 @@
 package com.petros.mailapplication.mail;
 
+import com.petros.mailapplication.model.Mail;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
@@ -13,8 +17,9 @@ import javax.mail.Store;
 
 public class CheckingMails {
 
-    public static void check(String host, String storeType, String user,
+    public static List<Mail> check(String host, String storeType, String user,
                              String password) {
+        List<Mail> mails=new ArrayList<>();
         try {
 
             // create properties field
@@ -54,11 +59,15 @@ public class CheckingMails {
                 System.out.println("Subject: " + message.getSubject());
                 System.out.println("From: " + message.getFrom()[0]);
                 System.out.println("Text: " + message.getContent().toString());
+//                mails.add(new Mail(message.getFrom()[0].toString(),message.getSubject(),message.getContent().toString()));
+
             }
 
             // close the store and folder objects
+
             emailFolder.close(false);
             store.close();
+//            return mails;
 
         } catch (NoSuchProviderException e) {
             e.printStackTrace();
@@ -67,6 +76,8 @@ public class CheckingMails {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        mails.add(new Mail("a@gmail.com","Subiect","textul meu"));
+        return mails;
     }
 }
 
