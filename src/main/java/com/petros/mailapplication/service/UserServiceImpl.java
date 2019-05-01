@@ -38,12 +38,21 @@ public class UserServiceImpl implements UserService {
         BeanUtils.copyProperties(registration,user);
         user.setPassword(passwordEncoder.encode(registration.getPassword()));
         user.setRoles(Arrays.asList(new Role("ROLE_USER")));
-//        user.setMails(Arrays.asList(new Mail("nimic@gmail.com","text")));
+//        user.setMails(Arrays.asList(new Mail("nimic@gmail.com","Subiect","Ce faci?"),new Mail("vlad@gmail.com","Suibect 2","Bine")));
         return userRepository.save(user);
     }
 
-    public void addMails(String email, List<Mail> mails){
-         userRepository.findByEmail(email).setMails(mails);
+    public User addMails(String email, List<Mail> mails){
+        User user=userRepository.findByEmail(email);
+        user.setMails(mails);
+        return userRepository.save(user);
+    }
+
+    public User deleteMails(String email){
+        User user=userRepository.findByEmail(email);
+//        user.getMails().clear();
+        user.setMails(null);
+        return userRepository.save(user);
     }
 
 

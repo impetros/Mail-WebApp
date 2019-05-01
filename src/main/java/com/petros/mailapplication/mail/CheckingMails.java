@@ -54,20 +54,12 @@ public class CheckingMails {
 
             for (int i = 0, n = messages.length; i < n; i++) {
                 Message message = messages[i];
-                System.out.println("---------------------------------");
-                System.out.println("Email Number " + (i + 1));
-                System.out.println("Subject: " + message.getSubject());
-                System.out.println("From: " + message.getFrom()[0]);
-                System.out.println("Text: " + message.getContent().toString());
-//                mails.add(new Mail(message.getFromMail()[0].toString(),message.getSubject(),message.getContent().toString()));
-
+                String from=message.getFrom()[0].toString();
+                mails.add(new Mail(from.substring(from.indexOf("<")+1,from.indexOf(">")),message.getSubject(),message.getContent().toString()));
             }
-
-            // close the store and folder objects
 
             emailFolder.close(false);
             store.close();
-//            return mails;
 
         } catch (NoSuchProviderException e) {
             e.printStackTrace();
@@ -76,7 +68,7 @@ public class CheckingMails {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        mails.add(new Mail("a@gmail.com","Subiect","textul meu"));
+//        mails.add(new Mail("a@gmail.com","Subiect","textul meu"));
         return mails;
     }
 }

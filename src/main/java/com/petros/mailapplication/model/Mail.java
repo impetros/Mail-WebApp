@@ -12,6 +12,7 @@ public class Mail {
 
     @ManyToOne(targetEntity = User.class,fetch = FetchType.EAGER)
     @JoinColumn(name="user")
+    @GeneratedValue()
     private User user;
     @Column(name="subject",nullable = false)
     private String subject;
@@ -23,8 +24,8 @@ public class Mail {
     public Mail() {
     }
 
-    public Mail(String destination,String subject, String text) {
-        this.fromMail = destination;
+    public Mail(String fromMail,String subject, String text) {
+        this.fromMail = fromMail;
         this.subject=subject;
         this.text = text;
     }
@@ -66,9 +67,10 @@ public class Mail {
     public String toString() {
         return "Mail{" +
                 "id=" + id +
-                ", fromMail='" + fromMail + '\'' +
-                ", text='" + text + '\'' +
-                '}';
+                ", fromMail=" + fromMail  +
+                ", subject=" + subject  +
+                ", text=" + text +  +
+                '}'+"\n";
     }
 
 }

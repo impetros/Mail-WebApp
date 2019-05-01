@@ -9,7 +9,9 @@ import java.util.List;
 
 public interface UserService extends UserDetailsService {
 
+//    List<Mail>
     User findByEmail(String email);
     User save(UserRegistrationDto registration);
-    void addMails(String email, List<Mail> mails);
+    User addMails(String email, List<Mail> mails);
+    User deleteMails(String email);
 }

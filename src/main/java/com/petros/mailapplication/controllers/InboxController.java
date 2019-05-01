@@ -24,7 +24,9 @@ public class InboxController {
         String username = "vladdob14@gmail.com";// change accordingly
         String password = "a!234567";// change accordingly
         List<Mail> mails=CheckingMails.check(host, mailStoreType, username, password);
-        userService.addMails(username,mails);
+        System.out.println(mails);
+//        userService.deleteMails("ana@gmail.com"); //nu sterge din tabel
+        userService.addMails("ana@gmail.com",mails);
         return "inbox";
     }
 }
