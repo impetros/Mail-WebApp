@@ -38,11 +38,11 @@ public class ComposeController {
 //        String pass=((UserDetails)principal).getPassword();
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String us=userDetails.getUsername();
-        String pass=userDetails.getPassword();//imi intoarce null
-//        User user = userRepository.findByEmail(us);
-//        BCryptPasswordEncoder encoder=new BCryptPasswordEncoder();
+        User user = userRepository.findByEmail(us);
+        BCryptPasswordEncoder encoder=new BCryptPasswordEncoder();
+//        String pass=encoder.matches(,);
 //        String pass=userDetails.getPassword();
-        System.out.println("user "+ us+" pass: "+pass);
+//        System.out.println("user "+ us+" pass: "+pass);
         SendMail.sendMail(host,mailStoreType,username,password,"petros@mailinator.com");
         return "sendmail";}
 

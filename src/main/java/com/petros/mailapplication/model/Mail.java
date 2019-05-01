@@ -2,7 +2,7 @@ package com.petros.mailapplication.model;
 
 import javax.persistence.*;
 
-@Entity
+@Entity(name="mails")
 @Table(name="mails")
 public class Mail {
 
@@ -10,12 +10,14 @@ public class Mail {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
 
-    @ManyToOne
-//    @JoinColumn(name="fk_id")
+    @ManyToOne(targetEntity = User.class,fetch = FetchType.EAGER)
+    @JoinColumn(name="user")
     private User user;
-
+    @Column(name="subject",nullable = false)
     private String subject;
+    @Column(name="from",nullable = false)
     private String from;
+    @Column(name="text",nullable = false)
     private String text;
 
     public Mail() {

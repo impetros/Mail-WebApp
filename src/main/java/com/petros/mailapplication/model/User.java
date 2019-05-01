@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-@Entity
+@Entity(name="users")
 @Table(name="users")
 public class User {
 
@@ -13,9 +13,13 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(name="first_name",nullable = false)
     private String firstName;
+    @Column(name="last_name",nullable = false)
     private String lastName;
+    @Column(name="email",nullable = false)
     private String email;
+    @Column(name="password",nullable = false)
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -27,8 +31,7 @@ public class User {
                     name = "role_id", referencedColumnName = "id"))
     private Collection < Role > roles;
 
-    ///(mappedBy = "user")
-    @OneToMany//(mappedBy = "user")
+    @OneToMany(targetEntity = Mail.class,cascade = CascadeType.ALL,mappedBy = "user")
     private List<Mail > mails;
 
     public User() {}
