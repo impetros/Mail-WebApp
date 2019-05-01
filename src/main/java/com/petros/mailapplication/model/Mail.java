@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Mail {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @ManyToOne(targetEntity = User.class,fetch = FetchType.EAGER)
@@ -15,8 +15,8 @@ public class Mail {
     private User user;
     @Column(name="subject",nullable = false)
     private String subject;
-    @Column(name="from",nullable = false)
-    private String from;
+    @Column(name="fromMail",nullable = false)
+    private String fromMail;
     @Column(name="text",nullable = false)
     private String text;
 
@@ -24,7 +24,7 @@ public class Mail {
     }
 
     public Mail(String destination,String subject, String text) {
-        this.from = destination;
+        this.fromMail = destination;
         this.subject=subject;
         this.text = text;
     }
@@ -38,12 +38,12 @@ public class Mail {
     }
 
 
-    public String getFrom() {
-        return from;
+    public String getFromMail() {
+        return fromMail;
     }
 
-    public void setFrom(String from) {
-        this.from = from;
+    public void setFromMail(String fromMail) {
+        this.fromMail = fromMail;
     }
 
     public String getText() {
@@ -66,7 +66,7 @@ public class Mail {
     public String toString() {
         return "Mail{" +
                 "id=" + id +
-                ", from='" + from + '\'' +
+                ", fromMail='" + fromMail + '\'' +
                 ", text='" + text + '\'' +
                 '}';
     }

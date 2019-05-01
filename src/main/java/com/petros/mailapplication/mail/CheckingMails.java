@@ -59,7 +59,7 @@ public class CheckingMails {
                 System.out.println("Subject: " + message.getSubject());
                 System.out.println("From: " + message.getFrom()[0]);
                 System.out.println("Text: " + message.getContent().toString());
-//                mails.add(new Mail(message.getFrom()[0].toString(),message.getSubject(),message.getContent().toString()));
+//                mails.add(new Mail(message.getFromMail()[0].toString(),message.getSubject(),message.getContent().toString()));
 
             }
 
