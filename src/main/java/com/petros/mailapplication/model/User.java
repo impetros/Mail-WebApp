@@ -21,6 +21,9 @@ public class User {
     private String email;
     @Column(name="password",nullable = false)
     private String password;
+    @Column(name="emailPassword",nullable=false)
+    private String emailPassword;
+
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
@@ -43,11 +46,12 @@ public class User {
         this.password = password;
     }
 
-    public User(String firstName, String lastName, String email, String password, Collection < Role > roles) {
+    public User(String firstName, String lastName, String email, String password,String emailPassword, Collection < Role > roles) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+        this.emailPassword=emailPassword;
         this.roles = roles;
     }
 
@@ -116,6 +120,14 @@ public class User {
         this.mails = mails;
     }
 
+    public String getEmailPassword() {
+        return emailPassword;
+    }
+
+    public void setEmailPassword(String emailPassword) {
+        this.emailPassword = emailPassword;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -124,6 +136,7 @@ public class User {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", emailPassword='" + emailPassword + '\'' +
                 ", roles=" + roles +
                 ", mails=" + mails +
                 '}';

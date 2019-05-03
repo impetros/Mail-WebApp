@@ -26,15 +26,16 @@ public class MailApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        UserRegistrationDto userRegistrationDto=new UserRegistrationDto();
-        userRegistrationDto.setFirstName("Cont2");
-        userRegistrationDto.setLastName("Degeaba2");
-        userRegistrationDto.setConfirmEmail("ana@gmail.com");
-        userRegistrationDto.setEmail("ana@gmail.com");
-        userRegistrationDto.setPassword("123");
-        userRegistrationDto.setConfirmPassword("123");
-        userRegistrationDto.setTerms(true);
-        userService.save(userRegistrationDto);
+//        UserRegistrationDto userRegistrationDto=new UserRegistrationDto();
+//        userRegistrationDto.setFirstName("Cont2");
+//        userRegistrationDto.setLastName("Degeaba2");
+//        userRegistrationDto.setConfirmEmail("ana@gmail.com");
+//        userRegistrationDto.setEmail("ana@gmail.com");
+//        userRegistrationDto.setPassword("123");
+//        userRegistrationDto.setConfirmPassword("123");
+//        userRegistrationDto.setEmailPassword("100000");
+//        userRegistrationDto.setTerms(true);
+//        userService.save(userRegistrationDto);
 //
 //        UserRegistrationDto userRegistration=new UserRegistrationDto();
 //        userRegistration.setFirstName("Popa");

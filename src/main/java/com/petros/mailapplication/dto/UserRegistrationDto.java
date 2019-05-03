@@ -32,6 +32,9 @@ public class UserRegistrationDto {
     @NotEmpty
     private String confirmEmail;
 
+    @NotEmpty
+    private String emailPassword;
+
     @AssertTrue
     private Boolean terms;
 
@@ -89,5 +92,13 @@ public class UserRegistrationDto {
 
     public void setTerms(Boolean terms) {
         this.terms = terms;
+    }
+
+    public String getEmailPassword() {
+        return emailPassword;
+    }
+
+    public void setEmailPassword(String emailPassword) {
+        this.emailPassword = emailPassword;
     }
 }

@@ -68,7 +68,6 @@ public class CheckingMails {
         } catch (Exception e) {
             e.printStackTrace();
         }
-//        mails.add(new Mail("a@gmail.com","Subiect","textul meu"));
         return mails;
     }
 }

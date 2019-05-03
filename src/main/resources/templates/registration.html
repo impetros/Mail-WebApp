@@ -81,8 +81,17 @@
                        th:text="${error}">Validation error</p>
                 </div>
                 <div class="form-group"
+                     th:classappend="${#fields.hasErrors('emailPassword')}? 'has-error':''">
+                    <label for="emailPassword" class="control-label">Email Password</label> <input
+                        fk_id="password" class="form-control" type="password"
+                        th:field="*{emailPassword}" />
+                    <p class="error-message"
+                       th:each="error : ${#fields.errors('emailPassword')}"
+                       th:text="${error}">Validation error</p>
+                </div>
+                <div class="form-group"
                      th:classappend="${#fields.hasErrors('password')}? 'has-error':''">
-                    <label for="password" class="control-label">Password</label> <input
+                    <label for="password" class="control-label">User password</label> <input
                         fk_id="password" class="form-control" type="password"
                         th:field="*{password}" />
                     <p class="error-message"
@@ -91,13 +100,14 @@
                 </div>
                 <div class="form-group"
                      th:classappend="${#fields.hasErrors('confirmPassword')}? 'has-error':''">
-                    <label for="confirmPassword" class="control-label">Confirm
+                    <label for="confirmPassword" class="control-label">Confirm user
                         password</label> <input fk_id="confirmPassword" class="form-control"
                                                 type="password" th:field="*{confirmPassword}" />
                     <p class="error-message"
                        th:each="error : ${#fields.errors('confirmPassword')}"
                        th:text="${error}">Validation error</p>
                 </div>
+
                 <div class="form-group"
                      th:classappend="${#fields.hasErrors('terms')}? 'has-error':''">
                     <input fk_id="terms" type="checkbox" th:field="*{terms}" />   <label

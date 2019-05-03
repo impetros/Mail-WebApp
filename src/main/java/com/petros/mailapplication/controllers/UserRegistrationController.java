@@ -2,12 +2,14 @@ package com.petros.mailapplication.controllers;
 import javax.validation.Valid;
 
 import com.petros.mailapplication.dto.UserRegistrationDto;
+import com.petros.mailapplication.mail.Authentication;
 import com.petros.mailapplication.model.User;
 import com.petros.mailapplication.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +22,7 @@ public class UserRegistrationController {
 
     @Autowired
     private UserService userService;
+   // private BindingResult result;
 
     @ModelAttribute("user")
     public UserRegistrationDto userRegistrationDto() {
@@ -39,8 +42,12 @@ public class UserRegistrationController {
         if (existing != null) {
             result.rejectValue("email", null, "There is already an account registered with that email");
         }
+        //System.out.println(Authentication.succesAuthentication(userDto.getEmail(),userDto.getEmailPassword()));
+        if(!Authentication.succesAuthentication(userDto.getEmail(),userDto.getEmailPassword()))
+            result.rejectValue("emailPassword",null,"Cannot connect to email address");
+            //result.addError(new ObjectError("emailPassword",""));
 
-        if (result.hasErrors()) {
+        if (result.hasErrors() ) {
             return "registration";
         }
 

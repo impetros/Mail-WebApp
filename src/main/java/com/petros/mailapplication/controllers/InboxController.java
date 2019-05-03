@@ -26,7 +26,7 @@ public class InboxController {
         List<Mail> mails=CheckingMails.check(host, mailStoreType, username, password);
         System.out.println(mails);
 //        userService.deleteMails("ana@gmail.com"); //nu sterge din tabel
-        userService.addMails("ana@gmail.com",mails);
+       // userService.addMails("ana@gmail.com",mails);
         return "inbox";
     }
 }
