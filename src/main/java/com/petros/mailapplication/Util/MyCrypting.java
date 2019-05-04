@@ -1,40 +1,51 @@
 package com.petros.mailapplication.Util;
 
+import java.util.Base64;
 import javax.crypto.Cipher;
+import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
 public class MyCrypting {
-    public static String encrypt(String strClearText,String strKey) throws Exception{
-        String strData;
 
+    private static final String encryptionKey           = "ABCDEFGHIJKLMNOP";
+    private static final String characterEncoding       = "UTF-8";
+    private static final String cipherTransformation    = "AES/CBC/PKCS5PADDING";
+    private static final String aesEncryptionAlgorithem = "AES";
+
+    public static String encrypt(String plainText) {
+        String encryptedText = "";
         try {
-            SecretKeySpec skeyspec=new SecretKeySpec(strKey.getBytes(),"Blowfish");
-            Cipher cipher=Cipher.getInstance("Blowfish");
-            cipher.init(Cipher.ENCRYPT_MODE, skeyspec);
-            byte[] encrypted=cipher.doFinal(strClearText.getBytes());
-            strData=new String(encrypted);
+            Cipher cipher   = Cipher.getInstance(cipherTransformation);
+            byte[] key      = encryptionKey.getBytes(characterEncoding);
+            SecretKeySpec secretKey = new SecretKeySpec(key, aesEncryptionAlgorithem);
+            IvParameterSpec ivparameterspec = new IvParameterSpec(key);
+            cipher.init(Cipher.ENCRYPT_MODE, secretKey, ivparameterspec);
+            byte[] cipherText = cipher.doFinal(plainText.getBytes("UTF8"));
+            Base64.Encoder encoder = Base64.getEncoder();
+            encryptedText = encoder.encodeToString(cipherText);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new Exception(e);
+        } catch (Exception E) {
+            System.err.println("Encrypt Exception : "+E.getMessage());
         }
-        return strData;
+        return encryptedText;
     }
 
-    public static String decrypt(String strEncrypted,String strKey) throws Exception{
-        String strData;
 
+    public static String decrypt(String encryptedText) {
+        String decryptedText = "";
         try {
-            SecretKeySpec skeyspec=new SecretKeySpec(strKey.getBytes(),"Blowfish");
-            Cipher cipher=Cipher.getInstance("Blowfish");
-            cipher.init(Cipher.DECRYPT_MODE, skeyspec);
-            byte[] decrypted=cipher.doFinal(strEncrypted.getBytes());
-            strData=new String(decrypted);
+            Cipher cipher = Cipher.getInstance(cipherTransformation);
+            byte[] key = encryptionKey.getBytes(characterEncoding);
+            SecretKeySpec secretKey = new SecretKeySpec(key, aesEncryptionAlgorithem);
+            IvParameterSpec ivparameterspec = new IvParameterSpec(key);
+            cipher.init(Cipher.DECRYPT_MODE, secretKey, ivparameterspec);
+            Base64.Decoder decoder = Base64.getDecoder();
+            byte[] cipherText = decoder.decode(encryptedText.getBytes("UTF8"));
+            decryptedText = new String(cipher.doFinal(cipherText), "UTF-8");
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new Exception(e);
+        } catch (Exception E) {
+            System.err.println("decrypt Exception : "+E.getMessage());
         }
-        return strData;
+        return decryptedText;
     }
 }

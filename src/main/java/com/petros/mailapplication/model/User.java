@@ -125,7 +125,7 @@ public class User {
     public String getEmailPassword() {
 //        return emailPassword;
         try {
-            return MyCrypting.decrypt(emailPassword, "123");
+            return MyCrypting.decrypt(emailPassword);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -135,7 +135,7 @@ public class User {
     public void setEmailPassword(String emailPassword) {
         //this.emailPassword = emailPassword;
         try {
-            this.emailPassword = MyCrypting.encrypt(emailPassword, "123");
+            this.emailPassword = MyCrypting.encrypt(emailPassword);
         }catch (Exception e){
             e.printStackTrace();
         }
