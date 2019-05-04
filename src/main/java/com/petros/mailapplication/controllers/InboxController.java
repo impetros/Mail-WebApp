@@ -23,8 +23,9 @@ public class InboxController {
         String mailStoreType = "pop3";
         String username = "vladdob14@gmail.com";// change accordingly
         String password = "a!234567";// change accordingly
-        List<Mail> mails=CheckingMails.check(host, mailStoreType, username, password);
-        System.out.println(mails);
+//        List<Mail> mails=CheckingMails.check(host, mailStoreType, username, password);
+//        System.out.println(mails);
+        System.out.println(userService.findByEmail("vladdob14@gmail.com").getEmailPassword());
 //        userService.deleteMails("ana@gmail.com"); //nu sterge din tabel
        // userService.addMails("ana@gmail.com",mails);
         return "inbox";

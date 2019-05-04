@@ -22,7 +22,6 @@ public class UserRegistrationController {
 
     @Autowired
     private UserService userService;
-   // private BindingResult result;
 
     @ModelAttribute("user")
     public UserRegistrationDto userRegistrationDto() {
@@ -42,10 +41,8 @@ public class UserRegistrationController {
         if (existing != null) {
             result.rejectValue("email", null, "There is already an account registered with that email");
         }
-        //System.out.println(Authentication.succesAuthentication(userDto.getEmail(),userDto.getEmailPassword()));
         if(!Authentication.succesAuthentication(userDto.getEmail(),userDto.getEmailPassword()))
             result.rejectValue("emailPassword",null,"Cannot connect to email address");
-            //result.addError(new ObjectError("emailPassword",""));
 
         if (result.hasErrors() ) {
             return "registration";

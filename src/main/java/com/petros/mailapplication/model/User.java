@@ -1,5 +1,7 @@
 package com.petros.mailapplication.model;
 
+import com.petros.mailapplication.Util.MyCrypting;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -51,7 +53,7 @@ public class User {
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.emailPassword=emailPassword;
+        setEmailPassword(emailPassword);
         this.roles = roles;
     }
 
@@ -121,11 +123,22 @@ public class User {
     }
 
     public String getEmailPassword() {
+//        return emailPassword;
+        try {
+            return MyCrypting.decrypt(emailPassword, "123");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return emailPassword;
     }
 
     public void setEmailPassword(String emailPassword) {
-        this.emailPassword = emailPassword;
+        //this.emailPassword = emailPassword;
+        try {
+            this.emailPassword = MyCrypting.encrypt(emailPassword, "123");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
