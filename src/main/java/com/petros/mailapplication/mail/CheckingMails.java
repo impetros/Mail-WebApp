@@ -2,18 +2,13 @@ package com.petros.mailapplication.mail;
 
 import com.petros.mailapplication.model.Mail;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import javax.mail.Authenticator;
-import javax.mail.Folder;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.NoSuchProviderException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Store;
+import javax.mail.*;
+import javax.mail.internet.MimeBodyPart;
 
 public class CheckingMails {
 
@@ -55,7 +50,8 @@ public class CheckingMails {
             for (int i = 0, n = messages.length; i < n; i++) {
                 Message message = messages[i];
                 String from=message.getFrom()[0].toString();
-                mails.add(new Mail(from.substring(from.indexOf("<")+1,from.indexOf(">")),message.getSubject(),message.getContent().toString()));
+
+                mails.add(new Mail(from.substring(from.indexOf("<")+1,from.indexOf(">")),message.getSubject(),getText(message)));//,message.getContent().toString()));//
             }
 
             emailFolder.close(false);
@@ -70,5 +66,35 @@ public class CheckingMails {
         }
         return mails;
     }
+
+    private static String getText(Message msg){
+        try {
+            String contentType = msg.getContentType();
+            String messageContent = "";
+
+            if (contentType.contains("multipart")) {
+                Multipart multiPart = (Multipart) msg.getContent();
+                int numberOfParts = multiPart.getCount();
+                for (int partCount = 0; partCount < numberOfParts; partCount++) {
+                    MimeBodyPart part = (MimeBodyPart) multiPart.getBodyPart(partCount);
+                    messageContent = part.getContent().toString();
+                }
+            } else if (contentType.contains("text/plain")
+                    || contentType.contains("text/html")) {
+                Object content = msg.getContent();
+                if (content != null) {
+                    messageContent = content.toString();
+                }
+            }
+            System.out.println(" Message: " + messageContent);
+            return messageContent;
+        }catch(IOException | MessagingException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }
+
+
 

@@ -1,17 +1,12 @@
 package com.petros.mailapplication;
 
 import com.petros.mailapplication.dto.UserRegistrationDto;
-import com.petros.mailapplication.model.Mail;
-import com.petros.mailapplication.model.Role;
-import com.petros.mailapplication.model.User;
-import com.petros.mailapplication.repository.UserRepository;
+
 import com.petros.mailapplication.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.util.Arrays;
 
 @SpringBootApplication
 public class MailApplication implements CommandLineRunner {
