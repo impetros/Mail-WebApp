@@ -13,5 +13,5 @@ public interface UserService extends UserDetailsService {
     User findByEmail(String email);
     User save(UserRegistrationDto registration);
     User addMails(String email, List<Mail> mails);
-    User deleteMails(String email);
+    void deleteMails();
 }

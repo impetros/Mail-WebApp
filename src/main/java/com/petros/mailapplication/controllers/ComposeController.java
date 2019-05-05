@@ -32,17 +32,12 @@ public class ComposeController {
         String mailStoreType = "pop3";
         String username = "vladdob14@gmail.com";// change accordingly
         String password = "a!234567";// change accordingly
-//
-//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        String us=((UserDetails)principal).getUsername();
-//        String pass=((UserDetails)principal).getPassword();
+
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String us=userDetails.getUsername();
         User user = userRepository.findByEmail(us);
         BCryptPasswordEncoder encoder=new BCryptPasswordEncoder();
-//        String pass=encoder.matches(,);
-//        String pass=userDetails.getPassword();
-//        System.out.println("user "+ us+" pass: "+pass);
+
         SendMail.sendMail(host,mailStoreType,username,password,"petros@mailinator.com");
         return "sendmail";}
 

@@ -6,11 +6,16 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+//import com.petros.mailapplication.Util.HibernateUtil;
 import com.petros.mailapplication.dto.UserRegistrationDto;
 import com.petros.mailapplication.model.Mail;
 import com.petros.mailapplication.model.Role;
 import com.petros.mailapplication.model.User;
+import com.petros.mailapplication.repository.MailRepository;
 import com.petros.mailapplication.repository.UserRepository;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -20,11 +25,14 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+
 @Service
 public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private MailRepository mailRepository;
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
@@ -38,21 +46,18 @@ public class UserServiceImpl implements UserService {
         BeanUtils.copyProperties(registration,user);
         user.setPassword(passwordEncoder.encode(registration.getPassword()));
         user.setRoles(Arrays.asList(new Role("ROLE_USER")));
-//        user.setMails(Arrays.asList(new Mail("nimic@gmail.com","Subiect","Ce faci?"),new Mail("vlad@gmail.com","Suibect 2","Bine")));
         return userRepository.save(user);
     }
 
     public User addMails(String email, List<Mail> mails){
+//        deleteMails();
         User user=userRepository.findByEmail(email);
         user.setMails(mails);
         return userRepository.save(user);
     }
 
-    public User deleteMails(String email){
-        User user=userRepository.findByEmail(email);
-//        user.getMails().clear();
-        user.setMails(null);
-        return userRepository.save(user);
+    public void deleteMails(){
+
     }
 
 

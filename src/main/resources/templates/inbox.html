@@ -38,11 +38,20 @@
 </nav>
 <!--<br>-->
 <body>
-<div>
-    <br>
-    <h1>Send a mail</h1>
-    <div class="container">
-    </div>
+<div class="row">
+    <h1>Inbox</h1>
+    <table class="table table-striped">
+        <tr>
+            <th>FROM_MAIL</th>
+            <th>EMAIL</th>
+            <th>TEXT</th>
+        </tr>
+        <tr th:each="mail : ${mails}">
+            <td th:text="${mail.from_mail}">Onions</td>
+            <td th:text="${mail.subject}">Onions</td>
+            <td th:text="${user.text}">Onions</td>
+        </tr>
+    </table>
 </div>
 </body>
 </html>

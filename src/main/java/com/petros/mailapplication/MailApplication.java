@@ -26,27 +26,15 @@ public class MailApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-//        UserRegistrationDto userRegistrationDto=new UserRegistrationDto();
-//        userRegistrationDto.setFirstName("Cont2");
-//        userRegistrationDto.setLastName("Degeaba2");
-//        userRegistrationDto.setConfirmEmail("ana@gmail.com");
-//        userRegistrationDto.setEmail("ana@gmail.com");
-//        userRegistrationDto.setPassword("123");
-//        userRegistrationDto.setConfirmPassword("123");
-//        userRegistrationDto.setEmailPassword("100000");
-//        userRegistrationDto.setTerms(true);
-//        userService.save(userRegistrationDto);
-//
-//        UserRegistrationDto userRegistration=new UserRegistrationDto();
-//        userRegistration.setFirstName("Popa");
-//        userRegistration.setLastName("Cristi");
-//        userRegistration.setConfirmEmail("cristi@gmail.com");
-//        userRegistration.setEmail("cristi@gmail.com");
-//        userRegistration.setPassword("123");
-//        userRegistration.setConfirmPassword("123");
-//        userRegistration.setTerms(true);
-//        userService.save(userRegistration);
-//        userService.addMails("ana@gmail.com",Arrays.asList(new Mail("nimic@gmail.com","Subiect","Ce faci?"),new Mail("vlad@gmail.com","Suibect 2","Bine")));
-//        userService.addMails("ana@gmail.com",Arrays.asList(new Mail("mihai@gmail.com","Subiect","Ce faci?"),new Mail("coco@gmail.com","Suibect 2","Bine")));
+        UserRegistrationDto userRegistrationDto=new UserRegistrationDto();
+        userRegistrationDto.setFirstName("Dobrescu");
+        userRegistrationDto.setLastName("Vlad");
+        userRegistrationDto.setConfirmEmail("vladdob14@gmail.com");
+        userRegistrationDto.setEmail("vladdob14@gmail.com");
+        userRegistrationDto.setEmailPassword("a!234567");
+        userRegistrationDto.setPassword("123");
+        userRegistrationDto.setConfirmPassword("123");
+        userRegistrationDto.setTerms(true);
+        userService.save(userRegistrationDto);
     }
 }
