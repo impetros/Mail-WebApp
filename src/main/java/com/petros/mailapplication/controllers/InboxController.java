@@ -5,6 +5,7 @@ import com.petros.mailapplication.model.Mail;
 import com.petros.mailapplication.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -19,7 +20,7 @@ public class InboxController {
     private UserService userService;
 
     @GetMapping
-    public String myinbox(Principal principal){
+    public String myinbox(Principal principal, Model model){
         String host = "pop.gmail.com";// change accordingly
         String mailStoreType = "pop3";
         String username=principal.getName();
@@ -27,7 +28,8 @@ public class InboxController {
         List<Mail> mails=CheckingMails.check(host, mailStoreType, username, password);
         //TREBUIE SA II FAC DELETE LA MAIL SI DUPA
         userService.addMails(username,mails);
-        System.out.println(mails);
+        model.addAttribute("mails", userService.findByEmail(username).getMails());
+//        System.out.println(mails);
         return "inbox";
     }
 }

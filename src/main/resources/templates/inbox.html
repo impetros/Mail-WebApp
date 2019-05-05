@@ -47,9 +47,9 @@
             <th>TEXT</th>
         </tr>
         <tr th:each="mail : ${mails}">
-            <td th:text="${mail.from_mail}">Onions</td>
+            <td th:text="${mail.fromMail}">Onions</td>
             <td th:text="${mail.subject}">Onions</td>
-            <td th:text="${user.text}">Onions</td>
+            <td th:text="${mail.text}">Onions</td>
         </tr>
     </table>
 </div>
