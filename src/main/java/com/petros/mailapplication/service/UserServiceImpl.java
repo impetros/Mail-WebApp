@@ -31,7 +31,8 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
-
+    @Autowired
+    private MailRepository mailRepository;
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;

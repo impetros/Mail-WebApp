@@ -29,7 +29,7 @@ public class InboxController {
         //TREBUIE SA II FAC DELETE LA MAIL SI DUPA
         userService.addMails(username,mails);
         model.addAttribute("mails", userService.findByEmail(username).getMails());
-//        System.out.println( userService.findByEmail(username).getMails());
+//        System.out.println(mails);
         return "inbox";
     }
 }
