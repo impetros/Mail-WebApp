@@ -31,5 +31,16 @@ public class MailApplication implements CommandLineRunner {
         userRegistrationDto.setConfirmPassword("123");
         userRegistrationDto.setTerms(true);
         userService.save(userRegistrationDto);
+
+        UserRegistrationDto userRegistrationDto2=new UserRegistrationDto();
+        userRegistrationDto2.setFirstName("Popa");
+        userRegistrationDto2.setLastName("Ana");
+        userRegistrationDto2.setConfirmEmail("anapopa0014@gmail.com");
+        userRegistrationDto2.setEmail("anapopa0014@gmail.com");
+        userRegistrationDto2.setEmailPassword("a!234567");
+        userRegistrationDto2.setPassword("123");
+        userRegistrationDto2.setConfirmPassword("123");
+        userRegistrationDto2.setTerms(true);
+        userService.save(userRegistrationDto2);
     }
 }

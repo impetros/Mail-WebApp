@@ -38,7 +38,6 @@ public class CheckingMails {
             Store store = emailSession.getStore("pop3s");
 
             store.connect();
-
             // create the folder object and open it
             Folder emailFolder = store.getFolder("INBOX");
             emailFolder.open(Folder.READ_ONLY);
@@ -50,7 +49,6 @@ public class CheckingMails {
             for (int i = 0, n = messages.length; i < n; i++) {
                 Message message = messages[i];
                 String from=message.getFrom()[0].toString();
-
                 mails.add(new Mail(from.substring(from.indexOf("<")+1,from.indexOf(">")),message.getSubject(),getText(message)));//,message.getContent().toString()));//
             }
 

@@ -18,7 +18,7 @@ public class Mail {
     private String subject;
     @Column(name="fromMail",nullable = false)
     private String fromMail;
-    @Column(name="text",nullable = false,length = 100000)
+    @Column(name="text",nullable = false,length = 1000000000)
     private String text;
 
     public Mail() {

@@ -122,6 +122,10 @@ public class User {
         this.mails = mails;
     }
 
+//    public void addMails(List<Mail> mails) {
+//        this.mails.addAll(mails);
+//    }
+
     public String getEmailPassword() {
 //        return emailPassword;
         try {
@@ -154,4 +158,6 @@ public class User {
                 ", mails=" + mails +
                 '}';
     }
+
+
 }
