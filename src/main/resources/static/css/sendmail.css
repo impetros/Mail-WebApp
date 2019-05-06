@@ -43,3 +43,7 @@ body{
     padding: 0 0 6em ;
 }
 
+textarea{
+    width: 500px;
+    height: 250px;
+}
