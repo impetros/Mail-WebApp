@@ -38,12 +38,14 @@
 </nav>
 <!--<br>-->
 <body>
-<div>
-    <br>
-    <h1>Send a mail</h1>
-    <div class="container">
-
-    </div>
-    </div>
+<div class="row">
+    <h1>Compose a mail</h1>
+    <form action="#" th:action="@{/sendmail}" th:object="${composeMail}" method="post">
+        <p>Send to: <input type="text" th:field="*{toEmailAdress}" /></p>
+        <p>Subject: <input type="text" th:field="*{subject}" /></p>
+        <p>Message: <input type="text" th:field="*{text}" /></p>
+        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+    </form>
+</div>
 </body>
 </html>

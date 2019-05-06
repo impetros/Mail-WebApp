@@ -12,7 +12,7 @@ import javax.mail.internet.MimeMessage;
 
 public class SendMail {
     public static void sendMail(String host, String storeType, String user,
-                                String password,String to)  {
+                                String password,String to,String subject,String text)  {
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
@@ -40,11 +40,10 @@ public class SendMail {
                     InternetAddress.parse(to));
 
             // Set Subject: header field
-            message.setSubject("Testing Subject");
+            message.setSubject(subject);
 
             // Now set the actual message
-            message.setText("Hello, this is sample for to check send " +
-                    "email using JavaMailAPI ");
+            message.setText(text);
 
             // Send message
             Transport.send(message);

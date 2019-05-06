@@ -26,10 +26,8 @@ public class InboxController {
         String username=principal.getName();
         String password=userService.findByEmail(username).getEmailPassword();
         List<Mail> mails=CheckingMails.check(host, mailStoreType, username, password);
-        //TREBUIE SA II FAC DELETE LA MAIL SI DUPA
         userService.addMails(username,mails);
         model.addAttribute("mails", userService.findByEmail(username).getMails());
-//        System.out.println(mails);
         return "inbox";
     }
 }

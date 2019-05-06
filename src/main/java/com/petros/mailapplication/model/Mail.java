@@ -12,7 +12,6 @@ public class Mail {
 
     @ManyToOne(targetEntity = User.class,fetch = FetchType.EAGER)
     @JoinColumn(name="user")
-    @GeneratedValue()
     private User user;
     @Column(name="subject",nullable = false)
     private String subject;
