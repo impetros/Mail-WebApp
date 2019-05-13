@@ -9,6 +9,12 @@ body{
     background-attachment: fixed;
 }
 
+p{
+    font-weight: bold;
+    margin: 0 0;
+    padding: 0 0;
+}
+
 .navbar-brand{
     margin: 0;
     padding: 0 ;
@@ -44,6 +50,7 @@ body{
 }
 .form-group{
     padding: 0.6em 0;
+
 }
 
 
@@ -56,12 +63,12 @@ body{
 .text-area {
     width: 500px;
     height: 250px;
-    margin: 0 0 0 20em;
+    margin: 0 0 0 17em;
 }
 
 
 .receivers {
     width:500px;
 
-    margin: 0 0 0 20em;
+    margin: 0 0 0 17em;
 }

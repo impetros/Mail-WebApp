@@ -1,16 +1,25 @@
 package com.petros.mailapplication.forms;
 
 public class ComposeMail {
-    private String toEmailAdress;
+    private int nrOfEmails;
+    private String emailsAddresses;
     private String subject;
     private String text;
 
-    public String getToEmailAdress() {
-        return toEmailAdress;
+    public int getNrOfEmails() {
+        return nrOfEmails;
     }
 
-    public void setToEmailAdress(String toEmailAdress) {
-        this.toEmailAdress = toEmailAdress;
+    public void setNrOfEmails(int nrOfEmails) {
+        this.nrOfEmails = nrOfEmails;
+    }
+
+    public String getEmailsAddresses() {
+        return emailsAddresses;
+    }
+
+    public void setEmailsAddresses(String emailsAddresses) {
+        this.emailsAddresses = emailsAddresses;
     }
 
     public String getSubject() {

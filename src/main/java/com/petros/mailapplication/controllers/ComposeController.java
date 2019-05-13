@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.*;
 
 @Controller
 @RequestMapping("/sendmail")
@@ -25,8 +26,11 @@ public class ComposeController {
 
     @PostMapping
     public String composeMailSubmit(@ModelAttribute ComposeMail composeMail,Principal principal) {
-        SendMail.sendMail("pop.gmail.com","pop3",principal.getName(),userService.findByEmail(principal.getName()).getEmailPassword(),
-                composeMail.getToEmailAdress(),composeMail.getSubject(),composeMail.getText());
+        List<String>emailAddress=Arrays.asList(composeMail.getEmailsAddresses().split(" "));
+//        System.out.println(emailAddress);
+        for(String mail : emailAddress)
+            SendMail.sendMail("pop.gmail.com","pop3",principal.getName(),userService.findByEmail(principal.getName()).getEmailPassword(),
+                    mail,composeMail.getSubject(),composeMail.getText());
         return "redirect:sendmail";
     }
 }
