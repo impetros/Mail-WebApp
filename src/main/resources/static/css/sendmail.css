@@ -42,8 +42,26 @@ body{
     width:10%;
     padding: 0 0 6em ;
 }
+.form-group{
+    padding: 0.6em 0;
+}
 
-textarea{
+
+.form-control{
+    width:200px;
+    height:30px;
+    /*position: center;*/
+    margin: 0 0 0 27em;
+}
+.text-area {
     width: 500px;
     height: 250px;
+    margin: 0 0 0 20em;
+}
+
+
+.receivers {
+    width:500px;
+
+    margin: 0 0 0 20em;
 }

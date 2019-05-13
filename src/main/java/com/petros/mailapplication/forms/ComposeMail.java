@@ -1,4 +1,4 @@
-package com.petros.mailapplication.model;
+package com.petros.mailapplication.forms;
 
 public class ComposeMail {
     private String toEmailAdress;

@@ -26,7 +26,10 @@ public class InboxController {
         String username=principal.getName();
         String password=userService.findByEmail(username).getEmailPassword();
         List<Mail> mails=CheckingMails.check(host, mailStoreType, username, password);
-        userService.addMails(username,mails);
+        if(mails.size()!=0)
+            userService.addMails(username,mails);
+        //nu-i vede mailuri utilizatorului
+        System.out.println(userService.findByEmail(username).getMails());
         model.addAttribute("mails", userService.findByEmail(username).getMails());
         return "inbox";
     }

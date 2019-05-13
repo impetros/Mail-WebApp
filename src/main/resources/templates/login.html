@@ -14,13 +14,9 @@
     <title>Login</title>
 </head>
 <body>
-<div sec:authorize="isAuthenticated()">
-    <p>You are already logged in.</p>
-    <p><a th:href="@{/logout}">Logout</a></p>
 
-</div>
 
-<div sec:authorize="!isAuthenticated()">
+
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -37,8 +33,14 @@
         </div>
     </div>
 </nav>
+    <div sec:authorize="isAuthenticated()" class="row">
+        <p>You are already logged in.</p>
+        <p><a th:href="@{/logout}">Logout</a></p>
+    </div>
 
 
+
+<div sec:authorize="!isAuthenticated()">
 <div class="container">
 
     <div class="row">

@@ -41,10 +41,18 @@
 <div class="row">
     <h1>Compose a mail</h1>
     <form action="#" th:action="@{/sendmail}" th:object="${composeMail}" method="post">
-        <p>Send to:  <input type="text" th:field="*{toEmailAdress}" /></p>
-        <p>Subject:  <input type="text" th:field="*{subject}" /></p>
-<!--        <p>Message: <input class="message" type="text" th:field="*{text}" /></p>-->
-        <p>Message:  <textarea  placeholder="Write something.."  type="text" th:field="*{text}" ></textarea></p>
+        <div class="form-group">
+            Number of receptors: <input type="number" name="quantity" min="1" max="20" value="1">
+        </div>
+        <div class="form-group" >
+            Send to: <input type="text" th:field="*{toEmailAdress}" placeholder="Receivers" class="form-control receivers"  />
+        </div>
+        <div class="form-group">
+            Subject: <input type="text" th:field="*{subject}" placeholder="Subject" class="form-control"/>
+        </div>
+        <div class="form-group">
+            Message: <textarea  placeholder="Write something.."  type="text" th:field="*{text}" class="form-control text-area" rows="10"></textarea>
+        </div>
         <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
     </form>
 </div>
