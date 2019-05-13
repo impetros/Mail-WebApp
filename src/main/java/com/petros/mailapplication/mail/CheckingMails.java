@@ -3,6 +3,7 @@ package com.petros.mailapplication.mail;
 import com.petros.mailapplication.model.Mail;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -51,7 +52,7 @@ public class CheckingMails {
                 Message message = messages[i];
                 String from=message.getFrom()[0].toString();
 //                String messgg = getText(message);
-                mails.add(new Mail(from.substring(from.indexOf("<")+1,from.indexOf(">")),message.getSubject(),message.getContent().toString()));
+                mails.add(new Mail(from.substring(from.indexOf("<")+1,from.indexOf(">")),message.getSubject(),message.getContent().toString(),message.getSentDate()));
 //                mails.add(new Mail(from.substring(from.indexOf("<")+1,from.indexOf(">")),message.getSubject(),getMessageContent(message)));
             }
 

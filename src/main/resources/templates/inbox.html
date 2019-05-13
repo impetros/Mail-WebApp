@@ -45,11 +45,13 @@
             <th>EMAIL</th>
             <th>SUBJECT</th>
             <th>TEXT</th>
+            <th>DATE</th>
         </tr>
         <tr th:each="mail : ${mails}">
             <td th:text="${mail.fromMail}">Onions</td>
             <td th:text="${mail.subject}">Onions</td>
             <td th:text="${mail.text}">Onions</td>
+            <td th:text="${mail.date}">Onions</td>
         </tr>
     </table>
 </div>
