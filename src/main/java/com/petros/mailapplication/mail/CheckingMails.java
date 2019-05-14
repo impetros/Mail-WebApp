@@ -52,8 +52,8 @@ public class CheckingMails {
                 Message message = messages[i];
                 String from=message.getFrom()[0].toString();
 //                String messgg = getText(message);
-                mails.add(new Mail(id,from.substring(from.indexOf("<")+1,from.indexOf(">")),message.getSubject(),message.getContent().toString(),message.getSentDate()));
-//                mails.add(new Mail(from.substring(from.indexOf("<")+1,from.indexOf(">")),message.getSubject(),getMessageContent(message)));
+//                mails.add(new Mail(id,from.substring(from.indexOf("<")+1,from.indexOf(">")),message.getSubject(),message.getContent().toString(),message.getSentDate()));
+                mails.add(new Mail(id,from.substring(from.indexOf("<")+1,from.indexOf(">")),message.getSubject(),getMessageContent(message),message.getSentDate()));
             }
             Collections.sort(mails, new Comparator<Mail>() {
                 @Override
