@@ -21,7 +21,7 @@ public class InboxController {
 
     @GetMapping
     public String myinbox(Principal principal, Model model){
-        String host = "pop.gmail.com";// change accordingly
+        String host = "pop.gmail.com";
         String mailStoreType = "pop3";
         String username=principal.getName();
         String password=userService.findByEmail(username).getEmailPassword();
@@ -29,8 +29,6 @@ public class InboxController {
         List<Mail> mails=CheckingMails.check(host, mailStoreType, username, password,id);
         if(mails.size()!=0)
             userService.addMails(username,mails);
-        //nu-i vede mailuri utilizatorului
-        System.out.println(userService.findByEmail(username).getMails());
         model.addAttribute("mails", userService.findByEmail(username).getMails());
         return "inbox";
     }

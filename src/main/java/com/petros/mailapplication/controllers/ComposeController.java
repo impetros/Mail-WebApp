@@ -27,10 +27,10 @@ public class ComposeController {
     @PostMapping
     public String composeMailSubmit(@ModelAttribute ComposeMail composeMail,Principal principal) {
         List<String>emailAddress=Arrays.asList(composeMail.getEmailsAddresses().split(" "));
-//        System.out.println(emailAddress);
         for(String mail : emailAddress)
             SendMail.sendMail("pop.gmail.com","pop3",principal.getName(),userService.findByEmail(principal.getName()).getEmailPassword(),
-                    mail,composeMail.getSubject(),composeMail.getText());
+                    mail,composeMail.getSubject(),composeMail.getText(),composeMail.getFile());
+        System.out.println(composeMail.getFile());
         return "redirect:sendmail";
     }
 }

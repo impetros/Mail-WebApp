@@ -1,11 +1,12 @@
 package com.petros.mailapplication.forms;
+import java.io.File;
 
 public class ComposeMail {
     private int nrOfEmails;
     private String emailsAddresses;
     private String subject;
     private String text;
-
+    private String file;
     public int getNrOfEmails() {
         return nrOfEmails;
     }
@@ -36,5 +37,13 @@ public class ComposeMail {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public String getFile() {
+        return file;
+    }
+
+    public void setFile(String file) {
+        this.file = file;
     }
 }
