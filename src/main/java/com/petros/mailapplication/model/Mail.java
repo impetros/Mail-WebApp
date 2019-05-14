@@ -26,7 +26,10 @@ public class Mail {
     public Mail() {
     }
 
-    public Mail(String fromMail,String subject, String text,Date date) {
+    public Mail(long id,String fromMail,String subject, String text,Date date) {
+        User user = new User();
+        user.setId(id);
+        this.user=user;
         this.fromMail = fromMail;
         this.subject=subject;
         this.text = text;
@@ -72,6 +75,14 @@ public class Mail {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override

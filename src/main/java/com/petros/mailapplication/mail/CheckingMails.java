@@ -1,12 +1,12 @@
 package com.petros.mailapplication.mail;
 
 import com.petros.mailapplication.model.Mail;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 
 import javax.mail.*;
 import javax.mail.internet.MimeBodyPart;
@@ -14,7 +14,7 @@ import javax.mail.internet.MimeBodyPart;
 public class CheckingMails {
 
     public static List<Mail> check(String host, String storeType, String user,
-                             String password) {
+                             String password,long id) {
         List<Mail> mails=new ArrayList<>();
         try {
 
@@ -52,10 +52,21 @@ public class CheckingMails {
                 Message message = messages[i];
                 String from=message.getFrom()[0].toString();
 //                String messgg = getText(message);
-                mails.add(new Mail(from.substring(from.indexOf("<")+1,from.indexOf(">")),message.getSubject(),message.getContent().toString(),message.getSentDate()));
+                mails.add(new Mail(id,from.substring(from.indexOf("<")+1,from.indexOf(">")),message.getSubject(),message.getContent().toString(),message.getSentDate()));
 //                mails.add(new Mail(from.substring(from.indexOf("<")+1,from.indexOf(">")),message.getSubject(),getMessageContent(message)));
             }
-
+            Collections.sort(mails, new Comparator<Mail>() {
+                @Override
+                public int compare(Mail o1, Mail o2) {
+                    if (o2.getDate().before(o1.getDate())) {
+                        return -1;
+                    } else if (o2.getDate().after(o1.getDate())) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+                }
+            });
             emailFolder.close(false);
             store.close();
 

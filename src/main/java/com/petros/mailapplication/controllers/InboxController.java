@@ -25,7 +25,8 @@ public class InboxController {
         String mailStoreType = "pop3";
         String username=principal.getName();
         String password=userService.findByEmail(username).getEmailPassword();
-        List<Mail> mails=CheckingMails.check(host, mailStoreType, username, password);
+        long id=userService.findByEmail(username).getId();
+        List<Mail> mails=CheckingMails.check(host, mailStoreType, username, password,id);
         if(mails.size()!=0)
             userService.addMails(username,mails);
         //nu-i vede mailuri utilizatorului
