@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
@@ -21,14 +22,6 @@ public class InboxController {
 
     @GetMapping
     public String myinbox(Principal principal, Model model){
-//        String host = "pop.gmail.com";
-//        String mailStoreType = "pop3";
-//        String username=principal.getName();
-//        String password=userService.findByEmail(username).getEmailPassword();
-//        long id=userService.findByEmail(username).getId();
-//        List<Mail> mails=CheckingMails.check(host, mailStoreType, username, password,id);
-//        if(mails.size()!=0)
-//            userService.addMails(username,mails);
         String username=principal.getName();
         model.addAttribute("mails", userService.findByEmail(username).getMails());
         return "inbox";
@@ -45,5 +38,18 @@ public class InboxController {
             userService.addMails(username,mails);
         model.addAttribute("mails", userService.findByEmail(username).getMails());
         return "inbox";
+    }
+    @GetMapping("/{id}")
+    public String mail(@PathVariable long id,Principal principal,Model model){
+        String username=principal.getName();
+       List<Mail>mails= userService.findByEmail(username).getMails();
+       int index=0;
+       for(Mail mail : mails){
+//           mail.getId()==id;
+           if(mail.getId()==id)
+               index=mails.indexOf(mail);
+       }
+        model.addAttribute("mail",mails.get(index) );
+        return "mail";
     }
 }
