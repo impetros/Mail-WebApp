@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css"
           th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
     <link rel="stylesheet" type="text/css"
-          th:href="@{/css/index.css}" />
+          th:href="@{/css/inbox.css}" />
     <title>Inbox</title>
 </head>
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -39,7 +39,11 @@
 <!--<br>-->
 <body>
 <div class="row">
-    <h1>Inbox</h1>
+
+    <h1><a href="#" th:href="@{/inbox/refresh}" >
+        <img src="https://img.icons8.com/cotton/2x/synchronize--v1.png" alt="refresh icon" class="refresh">
+    </a>Inbox</h1>
+
     <table class="table table-striped">
         <tr>
 <!--           // <th></th>-->

@@ -50,9 +50,8 @@ public class UserServiceImpl implements UserService {
     }
 
     public User addMails(String email, List<Mail> mails){
-//        deleteMails();
         User user=userRepository.findByEmail(email);
-        user.setMails(mails);
+        user.addMails(mails);
         return userRepository.save(user);
     }
 

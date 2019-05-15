@@ -9,6 +9,8 @@ body{
     background-attachment: fixed;
 }
 
+
+
 .navbar-brand{
     margin: 0;
     padding: 0 ;
@@ -44,3 +46,8 @@ body{
 }
 
 
+
+.refresh{
+    width:5%;
+    padding: 0 0;
+}
