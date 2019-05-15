@@ -1,5 +1,6 @@
 package com.petros.mailapplication.controllers;
 
+
 import com.petros.mailapplication.mail.CheckingMails;
 import com.petros.mailapplication.model.Mail;
 import com.petros.mailapplication.service.UserService;
@@ -39,17 +40,29 @@ public class InboxController {
         model.addAttribute("mails", userService.findByEmail(username).getMails());
         return "inbox";
     }
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable long id, Principal principal,Model model){
+        String username=principal.getName();
+        userService.deleteMail(id);
+        model.addAttribute("mails", userService.findByEmail(username).getMails());
+        return "inbox";
+    }
+
     @GetMapping("/{id}")
     public String mail(@PathVariable long id,Principal principal,Model model){
         String username=principal.getName();
        List<Mail>mails= userService.findByEmail(username).getMails();
-       int index=0;
-       for(Mail mail : mails){
-//           mail.getId()==id;
-           if(mail.getId()==id)
-               index=mails.indexOf(mail);
-       }
+        int index=findIndex(mails,id);
         model.addAttribute("mail",mails.get(index) );
         return "mail";
+    }
+
+    private int findIndex(List<Mail> mails,long id){
+        int index=0;
+        for(Mail mail : mails){
+            if(mail.getId()==id)
+                index=mails.indexOf(mail);
+        }
+        return index;
     }
 }

@@ -55,8 +55,9 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
-    public void deleteMails(){
-
+    public void deleteMail(long id){
+//        userRepository.findByEmail(email).getMails().remove(i);
+        mailRepository.deleteById(id);
     }
 
 

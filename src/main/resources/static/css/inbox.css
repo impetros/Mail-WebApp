@@ -53,7 +53,11 @@ body{
 }
 
 .enter-mail{
-    width: 50%;
+    width: 30px;
+}
+
+.delete-mail{
+    width: 30px;
 }
 
 /*td > a {*/

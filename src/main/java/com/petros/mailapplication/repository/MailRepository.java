@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MailRepository  extends JpaRepository<Mail,Long> {
-
+    void deleteById(long id);
 }

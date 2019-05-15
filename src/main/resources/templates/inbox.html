@@ -54,8 +54,10 @@
         </tr>
         <tr th:each="mail : ${mails}">
 <!--            <td th:text="${mail.id}"><a th:href="@{'/'+'inbox'+'/'+${mail.id}}">Onions</a></td>-->
-            <td><a href="#" th:href="@{'/'+'inbox'+'/'+${mail.id}}"><img src="https://images.vexels.com/media/users/3/154558/isolated/preview/dc1a5b86800a79f941354486ee5ebad5-hand-drawn-circle-scribble-icon-by-vexels.png"
-                                                                         alt="enter mail icon" class="enter-mail"></a> </td>
+            <td><a href="#" th:href="@{'/inbox/'+${mail.id}}"><img src="https://images.vexels.com/media/users/3/154558/isolated/preview/dc1a5b86800a79f941354486ee5ebad5-hand-drawn-circle-scribble-icon-by-vexels.png"
+                                                                         alt="enter mail icon" class="enter-mail"></a>
+                <a href="#" th:href="@{'/inbox/delete/'+${mail.id}}"> <img src="https://image.flaticon.com/icons/png/512/206/206529.png" alt="delete icon" class="delete-mail"></a>
+            </td>
             <td th:text="${mail.fromMail}">Onions</td>
             <td th:text="${mail.subject}">Onions</td>
             <td th:text="${mail.text}">Onions</td>
