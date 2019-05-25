@@ -30,7 +30,7 @@
             <ul class="nav navbar-nav">
                 <li sec:authorize="isAuthenticated()"><a th:href="@{/sendmail}">Compose</a></li>
                 <li sec:authorize="isAuthenticated()"><a th:href="@{/inbox}">Inbox</a></li>
-                <li sec:authorize="isAuthenticated()"><a th:href="@{/sendmail}">Sent mails</a></li>
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/sentmails}">Sent mails</a></li>
                 <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
             </ul>
         </div>
@@ -40,7 +40,7 @@
 <body>
 <div class="row">
     <h1>Compose a mail</h1>
-    <form action="#" th:action="@{/sendmail}" th:object="${composeMail}" method="post">
+    <form action="#" th:action="@{/sendmail}" th:object="${composeMail}" method="post" enctype="multipart/form-data">
 <!--        <div class="form-group">-->
 <!--            Number of receptors: <input type="number" name="quantity" min="1" max="20" value="1">-->
 <!--        </div>-->
@@ -53,8 +53,8 @@
         <div class="form-group">
             <p> Message: </p><textarea  placeholder="Write something.."  type="text" th:field="*{text}" class="form-control text-area" rows="10"></textarea>
         </div>
-        <p><input type='file' name='upload' th:field="*{file}"></p>
-
+<!--        <p><input type='file' name='upload' th:field="*{file}"></p>-->
+        <input id="multipleFileUploadInput" type="file" name="files" class="file-input" multiple required />
         <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
     </form>
 </div>

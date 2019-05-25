@@ -6,7 +6,9 @@ import com.petros.mailapplication.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.security.Principal;
 import java.util.*;
@@ -25,8 +27,12 @@ public class ComposeController {
     }
 
     @PostMapping
-    public String composeMailSubmit(@ModelAttribute ComposeMail composeMail,Principal principal) {
+    public String composeMailSubmit(@ModelAttribute ComposeMail composeMail,Principal principal, @RequestParam("files") MultipartFile[] files) {
         List<String>emailAddress=Arrays.asList(composeMail.getEmailsAddresses().split(" "));
+//        for (MultipartFile file : files) {
+//            String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+//            System.out.println(fileName);
+//        }
         for(String mail : emailAddress)
             SendMail.sendMail("pop.gmail.com","pop3",principal.getName(),userService.findByEmail(principal.getName()).getEmailPassword(),
                     mail,composeMail.getSubject(),composeMail.getText(),composeMail.getFile());

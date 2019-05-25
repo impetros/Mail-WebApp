@@ -24,9 +24,16 @@ public class InboxController {
     @GetMapping
     public String myinbox(Principal principal, Model model){
         String username=principal.getName();
-        model.addAttribute("mails", userService.findByEmail(username).getMails());
+        List<Mail> mails=userService.findByEmail(username).getMails();
+        for(Mail mail : mails){
+          if(mail.getText().length()>10){
+              mails.get(mails.indexOf(mail)).setText(mail.getText().trim().substring(0,7)+"...");
+          }
+        }
+        model.addAttribute("mails", mails);
         return "inbox";
     }
+
     @GetMapping("/refresh")
     public String refreshInbox(Principal principal,Model model){
         String host = "pop.gmail.com";
@@ -38,7 +45,7 @@ public class InboxController {
         if(mails.size()!=0)
             userService.addMails(username,mails);
         model.addAttribute("mails", userService.findByEmail(username).getMails());
-        return "inbox";
+        return "redirect:/inbox";
     }
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable long id, Principal principal,Model model){

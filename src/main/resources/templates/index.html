@@ -32,7 +32,7 @@
             <ul class="nav navbar-nav">
                 <li sec:authorize="isAuthenticated()"><a th:href="@{/sendmail}">Compose</a></li>
                 <li sec:authorize="isAuthenticated()"><a th:href="@{/inbox}">Inbox</a></li>
-                <li sec:authorize="isAuthenticated()"><a th:href="@{/sendmail}">Sent mails</a></li>
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/sentmails}">Sent mails</a></li>
                 <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
 
             </ul>
