@@ -11,4 +11,5 @@ import java.util.List;
 public interface MailRepository  extends JpaRepository<Mail,Long> {
     List<Mail> findMailByUserAndTip(User user,int tip);
     void deleteById(long id);
+    void deleteAllByUserAndTip(User user,int tip);
 }

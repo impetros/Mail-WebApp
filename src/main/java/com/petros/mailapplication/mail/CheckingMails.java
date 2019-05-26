@@ -6,12 +6,13 @@ import java.util.*;
 
 import javax.mail.*;
 import javax.mail.internet.MimeBodyPart;
+import javax.mail.search.FlagTerm;
 
 public class CheckingMails {
 
-    public static List<Mail> check(String host, String storeType, String user,
-                             String password,long id) {
-        List<Mail> mails=new ArrayList<>();
+    public static Set<Mail> check(String host, String storeType, String user,
+                                  String password,long id) {
+        Set<Mail> mails=new TreeSet<>();
         try {
 
             // create properties field
@@ -49,19 +50,6 @@ public class CheckingMails {
                 String from=message.getFrom()[0].toString();
                 mails.add(new Mail(id,from.substring(from.indexOf("<")+1,from.indexOf(">")),message.getSubject(),getMessageContent(message),message.getSentDate(),1));
             }
-
-            Collections.sort(mails, new Comparator<Mail>() {
-                @Override
-                public int compare(Mail o1, Mail o2) {
-                    if (o2.getDate().before(o1.getDate())) {
-                        return -1;
-                    } else if (o2.getDate().after(o1.getDate())) {
-                        return 1;
-                    } else {
-                        return 0;
-                    }
-                }
-            });
             emailFolder.close(false);
             store.close();
 
@@ -98,4 +86,3 @@ public class CheckingMails {
         return "";
     }
 }
-

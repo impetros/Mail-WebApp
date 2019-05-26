@@ -3,10 +3,7 @@ package com.petros.mailapplication.model;
 import com.petros.mailapplication.Util.MyCrypting;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Entity(name="users")
@@ -39,7 +36,7 @@ public class User {
     private Collection < Role > roles;
 
     @OneToMany(targetEntity = Mail.class,cascade = CascadeType.ALL,mappedBy = "user")
-    private Set<Mail > mails;
+    private List<Mail> mails;
 
     public User() {}
 
@@ -59,7 +56,7 @@ public class User {
         this.roles = roles;
     }
 
-    public User(String firstName, String lastName, String email, String password, Collection<Role> roles, Set<Mail> mails) {
+    public User(String firstName, String lastName, String email, String password, Collection<Role> roles, List<Mail> mails) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -120,16 +117,16 @@ public class User {
         return mails.stream().filter(x->x.getTip()==tip).collect(Collectors.toList());
     }
 
-    public void setMails(Set<Mail> mails) {
+    public void setMails(List<Mail> mails) {
         this.mails = mails;
     }
 
-    public void addMails(List<Mail> mails){
+    public void addMails(Set<Mail> mails){
         this.mails.addAll(mails);
+        Collections.sort(this.mails);
     }
 
     public String getEmailPassword() {
-//        return emailPassword;
         try {
             return MyCrypting.decrypt(emailPassword);
         }catch (Exception e){
@@ -139,7 +136,6 @@ public class User {
     }
 
     public void setEmailPassword(String emailPassword) {
-        //this.emailPassword = emailPassword;
         try {
             this.emailPassword = MyCrypting.encrypt(emailPassword);
         }catch (Exception e){

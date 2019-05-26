@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/inbox")
@@ -25,11 +26,6 @@ public class InboxController {
     public String myinbox(Principal principal, Model model){
         String username=principal.getName();
         List<Mail> mails=userService.getMails(username,1);
-//        for(Mail mail : mails){
-//          if(mail.getText().length()>10){
-//              mails.get(mails.indexOf(mail)).setText(mail.getText().trim().substring(0,7)+"...");
-//          }
-//        }
         model.addAttribute("mails", maxCharacters(mails));
         return "inbox";
     }
@@ -41,12 +37,12 @@ public class InboxController {
         String username=principal.getName();
         String password=userService.findByEmail(username).getEmailPassword();
         long id=userService.findByEmail(username).getId();
-        List<Mail> mails=CheckingMails.check(host, mailStoreType, username, password,id);
-        if(mails.size()!=0)
-            userService.addMails(username,mails,1);
+        Set<Mail> mails=CheckingMails.check(host, mailStoreType, username, password,id);
+        userService.addMails(username,mails,1);
         model.addAttribute("mails", userService.getMails(username,1));
         return "redirect:/inbox";
     }
+
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable long id, Principal principal,Model model){
@@ -82,5 +78,4 @@ public class InboxController {
         }
         return mails;
     }
-
 }

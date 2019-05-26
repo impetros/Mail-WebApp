@@ -1,10 +1,7 @@
 package com.petros.mailapplication.service;
 
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 //import com.petros.mailapplication.Util.HibernateUtil;
@@ -25,9 +22,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -50,16 +49,18 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
-    public User addMails(String email, List<Mail> mails,int tip){
+    public User addMails(String email, Set<Mail> mails, int tip){
         User user=userRepository.findByEmail(email);
-//        List<Mail> firstMails=user.getMails(tip);
-//        List<Mail> result = mails.stream().filter(elem -> !firstMails.contains(elem)).collect(Collectors.toList());
         user.addMails(mails);
         return userRepository.save(user);
     }
 
     public void deleteMail(long id){
         mailRepository.deleteById(id);
+    }
+
+    public void deleteAllMails(User user,int tip){
+        mailRepository.deleteAllByUserAndTip(user,tip);
     }
 
     public List<Mail> getMails(String email,int tip){

@@ -5,7 +5,7 @@ import java.util.Date;
 
 @Entity(name="mails")
 @Table(name="mails")
-public class Mail {
+public class Mail implements Comparable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -107,6 +107,18 @@ public class Mail {
                 ", date=" + date +
                 ", tip=" + tip +
                 '}'+"\n";
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        Mail o2=(Mail)o;
+        if (o2.getDate().before(this.getDate())) {
+            return -1;
+        } else if (o2.getDate().after(this.getDate())) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 
 }

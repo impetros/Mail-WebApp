@@ -9,13 +9,13 @@ import javax.mail.search.FlagTerm;
 
 public class SentMails
 {
-    public static List<Mail> read(String email, String password,long id)
+    public static Set<Mail> read(String email, String password,long id)
     {
         Folder sent;
         /*  Set the mail properties  */
         Properties props = System.getProperties();
         props.setProperty("mail.store.protocol", "imaps");
-        List<Mail> mails=new ArrayList<>();
+        Set<Mail> mails=new TreeSet<>();
         try
         {
             /*  Create the session and get the store for read the mail. */
@@ -79,3 +79,4 @@ public class SentMails
     }
 
 }
+
