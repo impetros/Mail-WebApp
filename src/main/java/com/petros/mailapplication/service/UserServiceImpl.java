@@ -56,10 +56,13 @@ public class UserServiceImpl implements UserService {
     }
 
     public void deleteMail(long id){
-//        userRepository.findByEmail(email).getMails().remove(i);
         mailRepository.deleteById(id);
     }
 
+    public List<Mail> getMails(String email,int tip){
+        User user=findByEmail(email);
+        return mailRepository.findMailByUserAndTip(user,tip);
+    }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {

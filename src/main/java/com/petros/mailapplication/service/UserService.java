@@ -13,5 +13,6 @@ public interface UserService extends UserDetailsService {
     User findByEmail(String email);
     User save(UserRegistrationDto registration);
     User addMails(String email, List<Mail> mails);
+    List<Mail> getMails(String email,int tip);
     void deleteMail(long id);
 }

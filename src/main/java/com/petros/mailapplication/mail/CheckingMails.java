@@ -1,11 +1,7 @@
 package com.petros.mailapplication.mail;
 
 import com.petros.mailapplication.model.Mail;
-import org.springframework.security.core.context.SecurityContextHolder;
-
 import java.io.IOException;
-import java.security.Principal;
-import java.sql.Date;
 import java.util.*;
 
 import javax.mail.*;
@@ -51,10 +47,9 @@ public class CheckingMails {
             for (int i = 0, n = messages.length; i < n; i++) {
                 Message message = messages[i];
                 String from=message.getFrom()[0].toString();
-//                String messgg = getText(message);
-//                mails.add(new Mail(id,from.substring(from.indexOf("<")+1,from.indexOf(">")),message.getSubject(),message.getContent().toString(),message.getSentDate()));
-                mails.add(new Mail(id,from.substring(from.indexOf("<")+1,from.indexOf(">")),message.getSubject(),getMessageContent(message),message.getSentDate()));
+                mails.add(new Mail(id,from.substring(from.indexOf("<")+1,from.indexOf(">")),message.getSubject(),getMessageContent(message),message.getSentDate(),1));
             }
+
             Collections.sort(mails, new Comparator<Mail>() {
                 @Override
                 public int compare(Mail o1, Mail o2) {
@@ -88,7 +83,7 @@ public class CheckingMails {
                 Multipart multipart = (Multipart) content;
                 for (int i = 0; i < multipart.getCount(); i++) {
                     Part part = multipart.getBodyPart(i);
-                    if (part.isMimeType("text/plain")) {
+                    if (part.isMimeType("text/plain")||part.isMimeType("TEXT/PLAIN")) {
                         messageContent.append(part.getContent().toString());
                     }
                 }
@@ -97,38 +92,10 @@ public class CheckingMails {
             return content.toString();
 
         } catch (IOException e) {
+            System.out.println("E grav ba");
             e.printStackTrace();
         }
         return "";
     }
-
-
-    private static String getText(Message msg){
-        try {
-            String contentType = msg.getContentType();
-            String messageContent = "";
-
-            if (contentType.contains("multipart")) {
-                Multipart multiPart = (Multipart) msg.getContent();
-                int numberOfParts = multiPart.getCount();
-                for (int partCount = 0; partCount < numberOfParts; partCount++) {
-                    MimeBodyPart part = (MimeBodyPart) multiPart.getBodyPart(partCount);
-                    messageContent = part.getContent().toString();
-                }
-            } else if (contentType.contains("text/plain")
-                    || contentType.contains("text/html")) {
-                Object content = msg.getContent();
-                if (content != null) {
-                    messageContent = content.toString();
-                }
-            }
-            System.out.println(" Message: " + messageContent);
-            return messageContent;
-        }catch(IOException | MessagingException e){
-            e.printStackTrace();
-        }
-        return null;
-    }
-
 }
 

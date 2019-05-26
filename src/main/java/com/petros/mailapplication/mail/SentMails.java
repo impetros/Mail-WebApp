@@ -94,48 +94,49 @@ public class SentMails
         }
         String subject = message.getSubject();
         Date receivedDate = message.getReceivedDate();
-        String content = message.getContent().toString();
+//        String content = message.getContent().toString();
+        String content=CheckingMails.getMessageContent(message);
         System.out.println("Subject : " + subject);
         System.out.println("Received Date : " + receivedDate.toString());
         System.out.println("Content : " + content);
-        getContent(message);
+//        getContent(message);
     }
 
-    public static void getContent(Message msg)
-    {
-        try
-        {
-            String contentType = msg.getContentType();
-            System.out.println("Content Type : " + contentType);
-            Multipart mp = (Multipart) msg.getContent();
-            int count = mp.getCount();
-            for (int i = 0; i < count; i++)
-            {
-                readMessageToFile(mp.getBodyPart(i));
-            }
-        }
-        catch (Exception ex)
-        {
-            System.out.println("Exception arise at get Content");
-            ex.printStackTrace();
-        }
-    }
-
-    public static void readMessageToFile(Part p) throws Exception
-    {
-        // Dump input stream ..
-        InputStream is = p.getInputStream();
-        // If "is" is not already buffered, wrap a BufferedInputStream
-        // around it.
-        if (!(is instanceof BufferedInputStream))
-        {
-            is = new BufferedInputStream(is);
-        }
-        int c;
-        System.out.println("Message : ");
-        while ((c = is.read()) != -1)
-        {
-            System.out.write(c);
-        }
-    }
+//    public static void getContent(Message msg)
+//    {
+//        try
+//        {
+//            String contentType = msg.getContentType();
+//            System.out.println("Content Type : " + contentType);
+//            Multipart mp = (Multipart) msg.getContent();
+//            int count = mp.getCount();
+//            for (int i = 0; i < count; i++)
+//            {
+//                readMessageToFile(mp.getBodyPart(i));
+//            }
+//        }
+//        catch (Exception ex)
+//        {
+//            System.out.println("Exception arise at get Content");
+//            ex.printStackTrace();
+//        }
+//    }
+//
+//    public static void readMessageToFile(Part p) throws Exception
+//    {
+//        // Dump input stream ..
+//        InputStream is = p.getInputStream();
+//        // If "is" is not already buffered, wrap a BufferedInputStream
+//        // around it.
+//        if (!(is instanceof BufferedInputStream))
+//        {
+//            is = new BufferedInputStream(is);
+//        }
+//        int c;
+//        System.out.println("Message : ");
+//        while ((c = is.read()) != -1)
+//        {
+//            System.out.write(c);
+//        }
+//    }
 }

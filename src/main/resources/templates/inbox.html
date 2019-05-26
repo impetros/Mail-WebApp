@@ -58,7 +58,7 @@
                                                                          alt="enter mail icon" class="enter-mail"></a>
                 <a href="#" th:href="@{'/inbox/delete/'+${mail.id}}"> <img src="https://image.flaticon.com/icons/png/512/206/206529.png" alt="delete icon" class="delete-mail"></a>
             </td>
-            <td th:text="${mail.fromMail}">Onions</td>
+            <td th:text="${mail.otherEmail}">Onions</td>
             <td th:text="${mail.subject}">Onions</td>
             <td th:text="${mail.text}">Onions</td>
             <td th:text="${mail.date}">Onions</td>

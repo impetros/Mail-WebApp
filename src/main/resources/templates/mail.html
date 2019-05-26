@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css"
           th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
     <link rel="stylesheet" type="text/css"
-          th:href="@{/css/index.css}" />
+          th:href="@{/css/inbox.css}" />
     <title>Mail</title>
 </head>
 <body>
@@ -41,7 +41,9 @@
 <br>
 <br>
 <div class="row" >
-    <h1 th:text="${mail.fromMail}"></h1>
+    <a href="#" th:href="@{'/inbox'}"> <img src="https://cdn3.iconfinder.com/data/icons/glyph/227/Button-Back-1-512.png" alt="back icon" class="back-mail"></a>
+    <a href="#" th:href="@{'/inbox/delete/'+${mail.id}}"> <img src="https://image.flaticon.com/icons/png/512/206/206529.png" alt="delete icon" class="delete-mail"></a>
+    <h1 th:text="${mail.otherEmail}"></h1>
     <p th:text="${mail.subject}"></p>
     <p th:text="${mail.text}"></p>
     <p th:text="${mail.date}"></p>

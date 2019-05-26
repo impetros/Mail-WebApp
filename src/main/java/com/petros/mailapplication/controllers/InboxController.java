@@ -24,7 +24,7 @@ public class InboxController {
     @GetMapping
     public String myinbox(Principal principal, Model model){
         String username=principal.getName();
-        List<Mail> mails=userService.findByEmail(username).getMails();
+        List<Mail> mails=userService.getMails(username,1);
         for(Mail mail : mails){
           if(mail.getText().length()>10){
               mails.get(mails.indexOf(mail)).setText(mail.getText().trim().substring(0,7)+"...");
@@ -44,21 +44,21 @@ public class InboxController {
         List<Mail> mails=CheckingMails.check(host, mailStoreType, username, password,id);
         if(mails.size()!=0)
             userService.addMails(username,mails);
-        model.addAttribute("mails", userService.findByEmail(username).getMails());
+        model.addAttribute("mails", userService.getMails(username,1));
         return "redirect:/inbox";
     }
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable long id, Principal principal,Model model){
         String username=principal.getName();
         userService.deleteMail(id);
-        model.addAttribute("mails", userService.findByEmail(username).getMails());
-        return "inbox";
+        model.addAttribute("mails", userService.getMails(username,1));
+        return "redirect:/inbox";
     }
 
     @GetMapping("/{id}")
     public String mail(@PathVariable long id,Principal principal,Model model){
         String username=principal.getName();
-       List<Mail>mails= userService.findByEmail(username).getMails();
+       List<Mail>mails= userService.getMails(username,1);
         int index=findIndex(mails,id);
         model.addAttribute("mail",mails.get(index) );
         return "mail";

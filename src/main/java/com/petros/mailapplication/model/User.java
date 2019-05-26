@@ -114,7 +114,7 @@ public class User {
         this.roles = roles;
     }
 
-    public List<Mail> getMails() {
+    public List<Mail> getMails(int tip) {
         return mails;
     }
 

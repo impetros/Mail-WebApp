@@ -56,12 +56,12 @@ public class SendMail {
             multipart.addBodyPart(messageBodyPart);
 
             // Part two is attachment
-            messageBodyPart = new MimeBodyPart();
-            String filename = "C:\\Users\\sargs\\Desktop\\Software engineering basic concepts.txt";
-            DataSource source = new FileDataSource(filename);
-            messageBodyPart.setDataHandler(new DataHandler(source));
-            messageBodyPart.setFileName(filename);
-            multipart.addBodyPart(messageBodyPart);
+//            messageBodyPart = new MimeBodyPart();
+//            String filename = "C:\\Users\\sargs\\Desktop\\Software engineering basic concepts.txt";
+//            DataSource source = new FileDataSource(filename);
+//            messageBodyPart.setDataHandler(new DataHandler(source));
+//            messageBodyPart.setFileName(filename);
+//            multipart.addBodyPart(messageBodyPart);
 
             // Send the complete message parts
             message.setContent(multipart);

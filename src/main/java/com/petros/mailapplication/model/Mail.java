@@ -16,24 +16,27 @@ public class Mail {
     private User user;
     @Column(name="subject",nullable = false)
     private String subject;
-    @Column(name="fromMail",nullable = false)
-    private String fromMail;
+    @Column(name="otherEmail",nullable = false)
+    private String otherEmail;
     @Column(name="text",nullable = false,length = 500000)
     private String text;
+    @Column(name="tip",nullable = false)
+    private int tip;
     @Column(name="date",nullable = false)
     private Date date;
 
     public Mail() {
     }
 
-    public Mail(long id,String fromMail,String subject, String text,Date date) {
+    public Mail(long id,String fromMail,String subject, String text,Date date,int tip) {
         User user = new User();
         user.setId(id);
         this.user=user;
-        this.fromMail = fromMail;
+        this.otherEmail = fromMail;
         this.subject=subject;
         this.text = text;
         this.date=date;
+        this.tip=tip;
     }
 
     public long getId() {
@@ -44,13 +47,12 @@ public class Mail {
         this.id = id;
     }
 
-
-    public String getFromMail() {
-        return fromMail;
+    public String getOtherEmail() {
+        return otherEmail;
     }
 
-    public void setFromMail(String fromMail) {
-        this.fromMail = fromMail;
+    public void setOtherEmail(String otherEmail) {
+        this.otherEmail = otherEmail;
     }
 
     public String getText() {
@@ -89,10 +91,11 @@ public class Mail {
     public String toString() {
         return "Mail{" +
                 "id=" + id +
-                ", fromMail=" + fromMail  +
+                ", otherEmail=" + otherEmail +
                 ", subject=" + subject  +
                 ", text=" + text +
                 ", date=" + date +
+                ", tip=" + tip +
                 '}'+"\n";
     }
 
