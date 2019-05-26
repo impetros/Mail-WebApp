@@ -1,5 +1,6 @@
 package com.petros.mailapplication.controllers;
 
+import com.petros.mailapplication.mail.DeleteMail;
 import com.petros.mailapplication.model.Mail;
 import com.petros.mailapplication.model.User;
 import com.petros.mailapplication.service.UserService;
@@ -20,6 +21,7 @@ public class SentMailsController {
 
     @Autowired
     UserService userService;
+
 
     @GetMapping
     public String sentMails(Model model, Principal principal) {
@@ -46,8 +48,9 @@ public class SentMailsController {
 
 
     @GetMapping("/delete/{id}")
-    public String delete(@PathVariable long id){
-        userService.deleteMail(id);
+    public String delete(@PathVariable long id,Principal principal){
+        String username=principal.getName();
+        userService.deleteMail(userService.findByEmail(username),id);
         return "redirect:/sentmails";
     }
 

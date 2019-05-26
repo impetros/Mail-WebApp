@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 //import com.petros.mailapplication.Util.HibernateUtil;
 import com.petros.mailapplication.dto.UserRegistrationDto;
+import com.petros.mailapplication.mail.DeleteMail;
 import com.petros.mailapplication.model.Mail;
 import com.petros.mailapplication.model.Role;
 import com.petros.mailapplication.model.User;
@@ -53,6 +54,11 @@ public class UserServiceImpl implements UserService {
         User user=userRepository.findByEmail(email);
         user.addMails(mails);
         return userRepository.save(user);
+    }
+
+    public void deleteMail(User user,long id){
+        DeleteMail.deleteMail(user.getEmail(),user.getEmailPassword(),id,mailRepository.findMailById(id));
+        mailRepository.deleteById(id);
     }
 
     public void deleteMail(long id){

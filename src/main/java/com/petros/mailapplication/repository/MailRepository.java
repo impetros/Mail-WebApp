@@ -10,6 +10,7 @@ import java.util.List;
 @Repository
 public interface MailRepository  extends JpaRepository<Mail,Long> {
     List<Mail> findMailByUserAndTip(User user,int tip);
+    Mail findMailById(long id);
     void deleteById(long id);
     void deleteAllByUserAndTip(User user,int tip);
 }
