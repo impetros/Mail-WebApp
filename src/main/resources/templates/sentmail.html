@@ -41,9 +41,9 @@
 <br>
 <br>
 <div class="row" >
-    <a href="#" th:href="@{'/inbox'}"> <img src="https://cdn3.iconfinder.com/data/icons/glyph/227/Button-Back-1-512.png" alt="back icon" class="back-mail"></a>
-    <a href="#" th:href="@{'/inbox/delete/'+${mail.id}}"> <img src="https://image.flaticon.com/icons/png/512/206/206529.png" alt="delete icon" class="delete-mail"></a>
-    <h1 th:text="${mail.otherEmail}"></h1>
+    <a href="#" th:href="@{'/sentmails'}"> <img src="https://cdn3.iconfinder.com/data/icons/glyph/227/Button-Back-1-512.png" alt="back icon" class="back-mail"></a>
+    <a href="#" th:href="@{'/sentmails/delete/'+${mail.id}}"> <img src="https://image.flaticon.com/icons/png/512/206/206529.png" alt="delete icon" class="delete-mail"></a>
+    <h3 th:text="${mail.otherEmail}"></h3>
     <p th:text="${mail.subject}"></p>
     <p th:text="${mail.text}"></p>
     <p th:text="${mail.date}"></p>

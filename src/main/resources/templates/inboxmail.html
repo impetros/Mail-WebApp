@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/css/inbox.css}" />
+    <title>Mail</title>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+                    aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span> <span
+                    class="icon-bar"></span> <span class="icon-bar"></span> <span
+                    class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/" th:href="@{/}">
+                <img src="http://www.pngall.com/wp-content/uploads/2/Email-PNG-Image-File.png" alt="mail icon" class="logo">
+            </a>
+        </div>
+        <div fk_id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/sendmail}">Compose</a></li>
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/inbox}">Inbox</a></li>
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/sentmails}">Sent mails</a></li>
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<br>
+<br>
+<div class="row" >
+    <a href="#" th:href="@{'/inbox'}"> <img src="https://cdn3.iconfinder.com/data/icons/glyph/227/Button-Back-1-512.png" alt="back icon" class="back-mail"></a>
+    <a href="#" th:href="@{'/inbox/delete/'+${mail.id}}"> <img src="https://image.flaticon.com/icons/png/512/206/206529.png" alt="delete icon" class="delete-mail"></a>
+    <h3 th:text="${mail.otherEmail}"></h3>
+    <p th:text="${mail.subject}"></p>
+    <p th:text="${mail.text}"></p>
+    <p th:text="${mail.date}"></p>
+</div>
+
+<script type="text/javascript"
+        th:src="@{/webjars/jquery/3.2.1/jquery.min.js/}"></script>
+<script type="text/javascript"
+        th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+
+</body>
+</html>

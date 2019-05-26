@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/css/inbox.css}" />
+    <title>Sent Mails</title>
+</head>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+                    aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span> <span
+                    class="icon-bar"></span> <span class="icon-bar"></span> <span
+                    class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/" th:href="@{/}">
+                <img src="http://www.pngall.com/wp-content/uploads/2/Email-PNG-Image-File.png" alt="mail icon" class="logo">
+            </a>
+        </div>
+        <div fk_id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/sendmail}">Compose</a></li>
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/inbox}">Inbox</a></li>
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/sentmails}">Sent mails</a></li>
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<body>
+<div class="row">
+
+    <h1><a href="#" th:href="@{/sentmails/refresh}" >
+        <img src="https://img.icons8.com/cotton/2x/synchronize--v1.png" alt="refresh icon" class="refresh">
+    </a>Sent Mails</h1>
+
+    <table class="table table-striped">
+        <tr>
+            <th></th>
+            <th>EMAIL</th>
+            <th>SUBJECT</th>
+            <th>TEXT</th>
+            <th>DATE</th>
+        </tr>
+        <tr th:each="mail : ${mails}">
+            <!--            <td th:text="${mail.id}"><a th:href="@{'/'+'inbox'+'/'+${mail.id}}">Onions</a></td>-->
+            <td><a href="#" th:href="@{'/sentmails/'+${mail.id}}"><img src="https://images.vexels.com/media/users/3/154558/isolated/preview/dc1a5b86800a79f941354486ee5ebad5-hand-drawn-circle-scribble-icon-by-vexels.png"
+                                                                   alt="enter mail icon" class="enter-mail"></a>
+                <a href="#" th:href="@{'/sentmails/delete/'+${mail.id}}"> <img src="https://image.flaticon.com/icons/png/512/206/206529.png" alt="delete icon" class="delete-mail"></a>
+            </td>
+            <td th:text="${mail.otherEmail}">Onions</td>
+            <td th:text="${mail.subject}">Onions</td>
+            <td th:text="${mail.text}">Onions</td>
+            <td th:text="${mail.date}">Onions</td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

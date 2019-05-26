@@ -6,6 +6,8 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity(name="users")
 @Table(name="users")
@@ -37,7 +39,7 @@ public class User {
     private Collection < Role > roles;
 
     @OneToMany(targetEntity = Mail.class,cascade = CascadeType.ALL,mappedBy = "user")
-    private List<Mail > mails;
+    private Set<Mail > mails;
 
     public User() {}
 
@@ -57,7 +59,7 @@ public class User {
         this.roles = roles;
     }
 
-    public User(String firstName, String lastName, String email, String password, Collection<Role> roles, List<Mail> mails) {
+    public User(String firstName, String lastName, String email, String password, Collection<Role> roles, Set<Mail> mails) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -115,10 +117,10 @@ public class User {
     }
 
     public List<Mail> getMails(int tip) {
-        return mails;
+        return mails.stream().filter(x->x.getTip()==tip).collect(Collectors.toList());
     }
 
-    public void setMails(List<Mail> mails) {
+    public void setMails(Set<Mail> mails) {
         this.mails = mails;
     }
 

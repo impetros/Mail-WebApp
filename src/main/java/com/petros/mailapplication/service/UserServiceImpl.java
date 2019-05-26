@@ -3,6 +3,7 @@ package com.petros.mailapplication.service;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -49,8 +50,10 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
-    public User addMails(String email, List<Mail> mails){
+    public User addMails(String email, List<Mail> mails,int tip){
         User user=userRepository.findByEmail(email);
+//        List<Mail> firstMails=user.getMails(tip);
+//        List<Mail> result = mails.stream().filter(elem -> !firstMails.contains(elem)).collect(Collectors.toList());
         user.addMails(mails);
         return userRepository.save(user);
     }
@@ -74,9 +77,6 @@ public class UserServiceImpl implements UserService {
                 user.getPassword(),
                 mapRolesToAuthorities(user.getRoles()));
     }
-
-
-
 
     private Collection < ? extends GrantedAuthority> mapRolesToAuthorities(Collection < Role > roles) {
         return roles.stream()

@@ -25,12 +25,12 @@ public class InboxController {
     public String myinbox(Principal principal, Model model){
         String username=principal.getName();
         List<Mail> mails=userService.getMails(username,1);
-        for(Mail mail : mails){
-          if(mail.getText().length()>10){
-              mails.get(mails.indexOf(mail)).setText(mail.getText().trim().substring(0,7)+"...");
-          }
-        }
-        model.addAttribute("mails", mails);
+//        for(Mail mail : mails){
+//          if(mail.getText().length()>10){
+//              mails.get(mails.indexOf(mail)).setText(mail.getText().trim().substring(0,7)+"...");
+//          }
+//        }
+        model.addAttribute("mails", maxCharacters(mails));
         return "inbox";
     }
 
@@ -43,10 +43,11 @@ public class InboxController {
         long id=userService.findByEmail(username).getId();
         List<Mail> mails=CheckingMails.check(host, mailStoreType, username, password,id);
         if(mails.size()!=0)
-            userService.addMails(username,mails);
+            userService.addMails(username,mails,1);
         model.addAttribute("mails", userService.getMails(username,1));
         return "redirect:/inbox";
     }
+
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable long id, Principal principal,Model model){
         String username=principal.getName();
@@ -60,11 +61,11 @@ public class InboxController {
         String username=principal.getName();
        List<Mail>mails= userService.getMails(username,1);
         int index=findIndex(mails,id);
-        model.addAttribute("mail",mails.get(index) );
-        return "mail";
+        model.addAttribute("mail",mails.get(index));
+        return "inboxmail";
     }
 
-    private int findIndex(List<Mail> mails,long id){
+    public static int findIndex(List<Mail> mails,long id){
         int index=0;
         for(Mail mail : mails){
             if(mail.getId()==id)
@@ -72,4 +73,14 @@ public class InboxController {
         }
         return index;
     }
+
+    public static List<Mail> maxCharacters(List<Mail> mails){
+        for(Mail mail : mails){
+            if(mail.getText().length()>10){
+                mails.get(mails.indexOf(mail)).setText(mail.getText().trim().substring(0,7)+"...");
+            }
+        }
+        return mails;
+    }
+
 }

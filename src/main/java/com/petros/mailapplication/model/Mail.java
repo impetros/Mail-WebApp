@@ -39,6 +39,7 @@ public class Mail {
         this.tip=tip;
     }
 
+
     public long getId() {
         return id;
     }
@@ -86,6 +87,15 @@ public class Mail {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public int getTip() {
+        return tip;
+    }
+
+    public void setTip(int tip) {
+        this.tip = tip;
+    }
+
 
     @Override
     public String toString() {
