@@ -1,10 +1,18 @@
 package com.petros.mailapplication.forms;
 
 public class ReplyMailForm {
+
+    private long id;
     private String to;
-    private String subject;
     private String text;
-    private String file;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getTo() {
         return to;
@@ -14,13 +22,6 @@ public class ReplyMailForm {
         this.to = to;
     }
 
-    public String getSubject() {
-        return subject;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
 
     public String getText() {
         return text;
@@ -30,11 +31,5 @@ public class ReplyMailForm {
         this.text = text;
     }
 
-    public String getFile() {
-        return file;
-    }
 
-    public void setFile(String file) {
-        this.file = file;
-    }
 }

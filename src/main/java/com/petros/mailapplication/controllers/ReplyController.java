@@ -8,11 +8,13 @@ import com.petros.mailapplication.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.security.Principal;
+import java.util.List;
+
+import static com.petros.mailapplication.controllers.InboxController.findIndex;
 
 @Controller
 @RequestMapping("/reply")
@@ -23,9 +25,23 @@ public class ReplyController {
 
 
     @GetMapping("/{id}")
-    public String replyForm(Model model,Principal principal){
-        ReplyMail.reply(principal.getName(),userService.findByEmail(principal.getName()).getEmailPassword(),new Mail(),new ReplyMailForm());
-        model.addAttribute("composeMail", new ComposeMail());
+    public String replyForm(Model model,@PathVariable long id,Principal principal){
+        String username=principal.getName();
+        List<Mail>mails= userService.getMails(username,1);
+        int index=findIndex(mails,id);
+        ReplyMailForm replyMailForm=new ReplyMailForm();
+        replyMailForm.setId(id);
+        replyMailForm.setTo(mails.get(index).getOtherEmail());
+        model.addAttribute("replyMail", replyMailForm);
         return "reply";
+    }
+
+    @PostMapping("/{id}")
+    public String replyMailSubmit(@ModelAttribute ReplyMailForm replyMailForm,@PathVariable long id, Principal principal) {
+        String username=principal.getName();
+        List<Mail>mails= userService.getMails(username,1);
+        int index=findIndex(mails,id);
+        ReplyMail.reply(username,userService.findByEmail(username).getEmailPassword(),mails.get(index),replyMailForm);
+        return "redirect:/inbox";
     }
 }

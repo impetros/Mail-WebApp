@@ -104,7 +104,6 @@ public class DeleteMail
                 if (message.getSentDate().equals(date) && CheckingMails.getMessageContent(message).equals(text) && message.getSubject().equals(subject) &&
                         from1.substring(from1.indexOf("<") + 1, from1.indexOf(">")).equals(from)) {
                     message.setFlag(Flags.Flag.DELETED, true);
-                    System.out.println("\n\n\n\n\nMerge\n\n\n\n");
                     break;
                 }
             }
