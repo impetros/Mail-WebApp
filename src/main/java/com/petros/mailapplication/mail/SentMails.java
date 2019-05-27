@@ -53,6 +53,8 @@ public class SentMails
                             otherMail+=a[j].toString();
                         }
                     }
+                    if(otherMail.contains("<"))
+                        otherMail= otherMail.substring(otherMail.indexOf("<") + 1, otherMail.indexOf(">"));
                     mails.add(new Mail(id,otherMail,message.getSubject(),CheckingMails.getMessageContent(message),message.getReceivedDate(),2));
                 }
                 sent.close(true);

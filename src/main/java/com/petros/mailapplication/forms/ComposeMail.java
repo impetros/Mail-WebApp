@@ -2,11 +2,22 @@ package com.petros.mailapplication.forms;
 import java.io.File;
 
 public class ComposeMail {
+
+    private long id;
     private int nrOfEmails;
     private String emailsAddresses;
     private String subject;
     private String text;
     private String file;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public int getNrOfEmails() {
         return nrOfEmails;
     }

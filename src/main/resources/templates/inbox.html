@@ -56,7 +56,8 @@
 <!--            <td th:text="${mail.id}"><a th:href="@{'/'+'inbox'+'/'+${mail.id}}">Onions</a></td>-->
             <td><a href="#" th:href="@{'/inbox/'+${mail.id}}"><img src="https://images.vexels.com/media/users/3/154558/isolated/preview/dc1a5b86800a79f941354486ee5ebad5-hand-drawn-circle-scribble-icon-by-vexels.png"
                                                                          alt="enter mail icon" class="enter-mail"></a>
-                <a href="#" th:href="@{'/reply/'+${mail.id}}"> <img src="https://cdn4.iconfinder.com/data/icons/email-2-2/32/Reply-all-Email-512.png" alt="forward icon" class="forward-mail"></a>
+                <a href="#" th:href="@{'/reply/'+${mail.id}}"> <img src="https://cdn4.iconfinder.com/data/icons/email-2-2/32/Reply-all-Email-512.png" alt="reply icon" class="reply-mail"></a>
+                <a href="#" th:href="@{'/forward/'+${mail.id}}"> <img src="https://img.icons8.com/metro/420/fast-forward.png" alt="forward icon" class="forward-mail"></a>
                 <a href="#" th:href="@{'/inbox/delete/'+${mail.id}}"> <img src="https://image.flaticon.com/icons/png/512/206/206529.png" alt="delete icon" class="delete-mail"></a>
 
             </td>

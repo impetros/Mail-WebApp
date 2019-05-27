@@ -10,7 +10,7 @@
           th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
     <link rel="stylesheet" type="text/css"
           th:href="@{/css/sendmail.css}" />
-    <title>Send Mail</title>
+    <title>Forward</title>
 </head>
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
@@ -40,15 +40,20 @@
 <body>
 <div class="row">
     <a href="#" th:href="@{'/inbox'}"> <img src="https://cdn3.iconfinder.com/data/icons/glyph/227/Button-Back-1-512.png" alt="back icon" class="back-mail"></a>
-    <h1>Reply to:</h1>
-    <form action="#" th:action="@{'/reply/'+${replyMail.id}}" th:object="${replyMail}" method="post" enctype="multipart/form-data">
+    <h1>Forward</h1>
+    <form action="#" th:action="@{'/forward/'+${composeMail.id}}" th:object="${composeMail}" method="post" enctype="multipart/form-data">
         <div class="form-group" >
-            <h4 th:text="${replyMail.to}"></h4>
+            <p>Send to: </p><input type="text" th:field="*{emailsAddresses}" placeholder="Receivers" class="form-control receivers"  />
+        </div>
+        <div class="form-group">
+            <p>Subject: </p><input type="text" th:field="*{subject}" placeholder="Subject" class="form-control"/>
         </div>
         <div class="form-group">
             <p> Message: </p><textarea  placeholder="Write something.."  type="text" th:field="*{text}" class="form-control text-area" rows="10"></textarea>
         </div>
-        <p><input type="submit" value="Submit"  /> <input type="reset" value="Reset" /></p>
+        <!--        <p><input type='file' name='upload' th:field="*{file}"></p>-->
+        <!--        <input id="multipleFileUploadInput" type="file" name="files" class="file-input" multiple required />-->
+        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
     </form>
 </div>
 </body>

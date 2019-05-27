@@ -1,23 +1,16 @@
 package com.petros.mailapplication.mail;
 
-import com.petros.mailapplication.forms.ReplyMailForm;
+import com.petros.mailapplication.forms.ComposeMail;
 import com.petros.mailapplication.model.Mail;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Date;
-import java.util.Properties;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.mail.search.FlagTerm;
+import java.util.Date;
+import java.util.Properties;
 
-public class ReplyMail {
-
-    public static void reply(String email, String password, Mail mail, ReplyMailForm replyMailForm) {
-
+public class ForwardMail {
+    public static void forward(String email, String password, String to, Mail mail, ComposeMail composeMail){
         String from = mail.getOtherEmail();
         String text = mail.getText();
         String subject = mail.getSubject();
@@ -40,7 +33,6 @@ public class ReplyMail {
 
             Message[] messages = folder.getMessages();
             System.out.println("Total Message - " + messages.length);
-
             int emailNo=0;
             for (int i = 0; i < messages.length; i++) {
                 Message message = messages[i];
@@ -51,15 +43,24 @@ public class ReplyMail {
                 }
             }
             Message emailMessage = folder.getMessage(emailNo);
-            Message mimeMessage = new MimeMessage(emailSession);
 
+            Message mimeMessage = new MimeMessage(emailSession);
             mimeMessage = (MimeMessage) emailMessage.reply(false);
             mimeMessage.setFrom(new InternetAddress(email));
-            mimeMessage.setText(replyMailForm.getText());
-            mimeMessage.setSubject("RE: " + mimeMessage.getSubject());
-            mimeMessage.addRecipient(Message.RecipientType.TO,
-                    emailMessage.getFrom()[0]);
+            mimeMessage.setSubject("Fwd: " + mimeMessage.getSubject());
+            mimeMessage.setText(composeMail.getText());
+            mimeMessage.setRecipients(Message.RecipientType.TO,
+                    InternetAddress.parse(to));
 
+//            Message mimeMessage = new MimeMessage(emailSession);
+//
+//            mimeMessage = (MimeMessage) emailMessage.reply(false);
+//            mimeMessage.setFrom(new InternetAddress(email));
+//            mimeMessage.setText(composeMail.getText());
+//            mimeMessage.setSubject("RE: " + mimeMessage.getSubject());
+//            mimeMessage.addRecipient(Message.RecipientType.TO,
+//                    emailMessage.getFrom()[0]);
+            System.out.println("\n\nMerge\n\n");
             Transport t = emailSession.getTransport("smtp");
 
             t.connect(email, password);
