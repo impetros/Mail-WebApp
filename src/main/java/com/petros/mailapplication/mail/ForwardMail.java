@@ -42,25 +42,17 @@ public class ForwardMail {
                     emailNo=i;
                 }
             }
-            Message emailMessage = folder.getMessage(emailNo);
+            System.out.println(emailNo);
+            Message emailMessage = messages[emailNo];
 
             Message mimeMessage = new MimeMessage(emailSession);
             mimeMessage = (MimeMessage) emailMessage.reply(false);
             mimeMessage.setFrom(new InternetAddress(email));
-            mimeMessage.setSubject("Fwd: " + mimeMessage.getSubject());
+            mimeMessage.setSubject("Fwd: " + subject);
             mimeMessage.setText(composeMail.getText());
             mimeMessage.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(to));
 
-//            Message mimeMessage = new MimeMessage(emailSession);
-//
-//            mimeMessage = (MimeMessage) emailMessage.reply(false);
-//            mimeMessage.setFrom(new InternetAddress(email));
-//            mimeMessage.setText(composeMail.getText());
-//            mimeMessage.setSubject("RE: " + mimeMessage.getSubject());
-//            mimeMessage.addRecipient(Message.RecipientType.TO,
-//                    emailMessage.getFrom()[0]);
-            System.out.println("\n\nMerge\n\n");
             Transport t = emailSession.getTransport("smtp");
 
             t.connect(email, password);

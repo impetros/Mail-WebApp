@@ -41,7 +41,7 @@ public class ReplyMail {
             Message[] messages = folder.getMessages();
             System.out.println("Total Message - " + messages.length);
 
-            int emailNo=0;
+            int emailNo=-1;
             for (int i = 0; i < messages.length; i++) {
                 Message message = messages[i];
                 String from1 = message.getFrom()[0].toString();
@@ -50,16 +50,18 @@ public class ReplyMail {
                     emailNo=i;
                 }
             }
-            Message emailMessage = folder.getMessage(emailNo);
+            System.out.println(1);
+            Message emailMessage = messages[emailNo];
+            System.out.println(2);
             Message mimeMessage = new MimeMessage(emailSession);
 
             mimeMessage = (MimeMessage) emailMessage.reply(false);
             mimeMessage.setFrom(new InternetAddress(email));
             mimeMessage.setText(replyMailForm.getText());
-            mimeMessage.setSubject("RE: " + mimeMessage.getSubject());
+            mimeMessage.setSubject("RE: " + subject);
             mimeMessage.addRecipient(Message.RecipientType.TO,
                     emailMessage.getFrom()[0]);
-
+            System.out.println(4);
             Transport t = emailSession.getTransport("smtp");
 
             t.connect(email, password);
