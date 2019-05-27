@@ -121,7 +121,7 @@ public class User {
         this.mails = mails;
     }
 
-    public void addMails(Set<Mail> mails){
+    public void addMails(Collection<Mail> mails){
         this.mails.addAll(mails);
         Collections.sort(this.mails);
     }

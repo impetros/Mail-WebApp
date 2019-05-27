@@ -10,46 +10,29 @@ import javax.mail.search.FlagTerm;
 
 public class CheckingMails {
 
-    public static Set<Mail> check(String host, String storeType, String user,
+    public static List<Mail>  check(String host, String storeType, String user,
                                   String password,long id) {
-        Set<Mail> mails=new TreeSet<>();
+        List<Mail> mails = new ArrayList<>();
         try {
-
-            // create properties field
             Properties properties = new Properties();
+            properties.put("mail.store.protocol", "imaps");
+            Session emailSession = Session.getDefaultInstance(properties);
+            Store store = emailSession.getStore();
+            store.connect(host, user, password);
 
-            properties.put("mail.pop3s.host", host);
-            properties.put("mail.pop3s.port", "995");
-            properties.put("mail.pop3s.starttls.enable", "true");
-
-            // Setup authentication, get session
-            Session emailSession = Session.getInstance(properties,
-                    new javax.mail.Authenticator() {
-                        protected PasswordAuthentication getPasswordAuthentication() {
-                            return new PasswordAuthentication(
-                                    user, password);
-                        }
-                    });
-            // emailSession.setDebug(true);
-
-            // create the POP3 store object and connect with the pop server
-            Store store = emailSession.getStore("pop3s");
-
-            store.connect();
-
-            // create the folder object and open it
             Folder emailFolder = store.getFolder("INBOX");
-            emailFolder.open(Folder.READ_ONLY);
+            // use READ_ONLY if you don't wish the messages
+            // to be marked as read after retrieving its content
+            emailFolder.open(Folder.READ_WRITE);
 
-            // retrieve the messages from the folder in an array and print it
             Message[] messages = emailFolder.getMessages();
             System.out.println("messages.length---" + messages.length);
-
             for (int i = 0, n = messages.length; i < n; i++) {
                 Message message = messages[i];
-                String from=message.getFrom()[0].toString();
-                mails.add(new Mail(id,from.substring(from.indexOf("<")+1,from.indexOf(">")),message.getSubject(),getMessageContent(message),message.getSentDate(),1));
+                String from = message.getFrom()[0].toString();
+                mails.add(new Mail(id, from.substring(from.indexOf("<") + 1, from.indexOf(">")), message.getSubject(), getMessageContent(message), message.getSentDate(), 1));
             }
+
             emailFolder.close(false);
             store.close();
 
@@ -57,15 +40,14 @@ public class CheckingMails {
             e.printStackTrace();
         } catch (MessagingException e) {
             e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
         return mails;
     }
 
+
     public static String getMessageContent(Message message) throws MessagingException {
         try {
-            Object content = message.getContent();
+            Object content=message.getContent();
             if (content instanceof Multipart) {
                 StringBuffer messageContent = new StringBuffer();
                 Multipart multipart = (Multipart) content;
@@ -85,4 +67,6 @@ public class CheckingMails {
         }
         return "";
     }
+
+
 }

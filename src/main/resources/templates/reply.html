@@ -9,8 +9,8 @@
     <link rel="stylesheet" type="text/css"
           th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
     <link rel="stylesheet" type="text/css"
-          th:href="@{/css/inbox.css}" />
-    <title>Inbox</title>
+          th:href="@{/css/sendmail.css}" />
+    <title>Send Mail</title>
 </head>
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
@@ -36,36 +36,28 @@
         </div>
     </div>
 </nav>
-
+<!--<br>-->
 <body>
 <div class="row">
-
-    <h1><a href="#" th:href="@{/inbox/refresh}" >
-        <img src="https://img.icons8.com/cotton/2x/synchronize--v1.png" alt="refresh icon" class="refresh">
-    </a>Inbox</h1>
-
-    <table class="table table-striped">
-        <tr>
-            <th></th>
-            <th>EMAIL</th>
-            <th>SUBJECT</th>
-            <th>TEXT</th>
-            <th>DATE</th>
-        </tr>
-        <tr th:each="mail : ${mails}">
-<!--            <td th:text="${mail.id}"><a th:href="@{'/'+'inbox'+'/'+${mail.id}}">Onions</a></td>-->
-            <td><a href="#" th:href="@{'/inbox/'+${mail.id}}"><img src="https://images.vexels.com/media/users/3/154558/isolated/preview/dc1a5b86800a79f941354486ee5ebad5-hand-drawn-circle-scribble-icon-by-vexels.png"
-                                                                         alt="enter mail icon" class="enter-mail"></a>
-                <a href="#" th:href="@{'/reply/'+${mail.id}}"> <img src="https://cdn4.iconfinder.com/data/icons/email-2-2/32/Reply-all-Email-512.png" alt="forward icon" class="forward-mail"></a>
-                <a href="#" th:href="@{'/inbox/delete/'+${mail.id}}"> <img src="https://image.flaticon.com/icons/png/512/206/206529.png" alt="delete icon" class="delete-mail"></a>
-
-            </td>
-            <td th:text="${mail.otherEmail}">Onions</td>
-            <td th:text="${mail.subject}">Onions</td>
-            <td th:text="${mail.text}">Onions</td>
-            <td th:text="${mail.date}">Onions</td>
-        </tr>
-    </table>
+    <h1>Compose a mail</h1>
+    <form action="#" th:action="@{/sendmail}" th:object="${composeMail}" method="post" enctype="multipart/form-data">
+        <!--        <div class="form-group">-->
+        <!--            Number of receptors: <input type="number" name="quantity" min="1" max="20" value="1">-->
+        <!--        </div>-->
+        <div class="form-group" >
+            <p>Send to: </p><input type="text" th:field="*{emailsAddresses}" placeholder="Receivers" class="form-control receivers"  />
+        </div>
+        <div class="form-group">
+            <p>Subject: </p><input type="text" th:field="*{subject}" placeholder="Subject" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <p> Message: </p><textarea  placeholder="Write something.."  type="text" th:field="*{text}" class="form-control text-area" rows="10"></textarea>
+        </div>
+        <!--        <p><input type='file' name='upload' th:field="*{file}"></p>-->
+        <!--        <input id="multipleFileUploadInput" type="file" name="files" class="file-input" multiple required />-->
+        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+    </form>
 </div>
 </body>
+
 </html>

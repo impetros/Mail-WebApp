@@ -29,10 +29,6 @@ public class ComposeController {
     @PostMapping
     public String composeMailSubmit(@ModelAttribute ComposeMail composeMail,Principal principal, @RequestParam("files") MultipartFile[] files) {
         List<String>emailAddress=Arrays.asList(composeMail.getEmailsAddresses().split(" "));
-//        for (MultipartFile file : files) {
-//            String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-//            System.out.println(fileName);
-//        }
         for(String mail : emailAddress)
             SendMail.sendMail("pop.gmail.com","pop3",principal.getName(),userService.findByEmail(principal.getName()).getEmailPassword(),
                     mail,composeMail.getSubject(),composeMail.getText(),composeMail.getFile());

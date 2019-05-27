@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
-    public User addMails(String email, Set<Mail> mails, int tip){
+    public User addMails(String email, Collection<Mail> mails, int tip){
         User user=userRepository.findByEmail(email);
         user.addMails(mails);
         return userRepository.save(user);

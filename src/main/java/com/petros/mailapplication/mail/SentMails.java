@@ -22,7 +22,6 @@ public class SentMails
             Session session = Session.getDefaultInstance(props, null);
             Store store = session.getStore("imaps");
             store.connect("imap.gmail.com",email, password);
-
             /*  Mention the folder name which you want to read. */
             sent = store.getFolder("[Gmail]/Mesaje trimise");
             System.out.println("No of Sent Messages : " +sent.getMessageCount());
