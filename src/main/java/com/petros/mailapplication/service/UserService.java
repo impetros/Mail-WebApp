@@ -14,7 +14,7 @@ public interface UserService extends UserDetailsService {
     User save(UserRegistrationDto registration);
     User addMails(String email, Collection<Mail> mails, int tip);
     List<Mail> getMails(String email,int tip);
-    void deleteMail(User user,long id);
+    void deleteMail(User user,long id,int tip);
     void deleteMail(long id);
     void deleteAllMails(User user,int tip);
 }

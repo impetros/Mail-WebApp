@@ -3,6 +3,7 @@ package com.petros.mailapplication.controllers;
 
 import com.petros.mailapplication.mail.CheckingMails;
 import com.petros.mailapplication.model.Mail;
+import com.petros.mailapplication.model.User;
 import com.petros.mailapplication.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.Set;
 
 @Controller
 @RequestMapping("/inbox")
@@ -31,24 +31,29 @@ public class InboxController {
     }
 
     @GetMapping("/refresh")
-    public String refreshInbox(Principal principal,Model model){
+    public String refreshInbox(Principal principal){
+        String username=principal.getName();
+        User user=userService.findByEmail(username);
+        userService.deleteAllMails(user,1);
+        return "redirect:/inbox/intermediate";
+    }
+
+    @GetMapping("/intermediate")
+    public String intermediate(Principal principal,Model model) {
         String host = "pop.gmail.com";
-        String mailStoreType = "pop3";
         String username=principal.getName();
         String password=userService.findByEmail(username).getEmailPassword();
         long id=userService.findByEmail(username).getId();
-        List<Mail> mails=CheckingMails.check(host, mailStoreType, username, password,id);
+        List<Mail> mails=CheckingMails.check(host, username, password,id);
         userService.addMails(username,mails,1);
         model.addAttribute("mails", userService.getMails(username,1));
         return "redirect:/inbox";
     }
 
-
     @GetMapping("/delete/{id}")
-    public String delete(@PathVariable long id, Principal principal,Model model){
+    public String delete(@PathVariable long id, Principal principal){
         String username=principal.getName();
-        userService.deleteMail(id);
-        model.addAttribute("mails", userService.getMails(username,1));
+        userService.deleteMail(userService.findByEmail(username),id,1);
         return "redirect:/inbox";
     }
 

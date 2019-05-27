@@ -56,8 +56,10 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
-    public void deleteMail(User user,long id){
-        DeleteMail.deleteMail(user.getEmail(),user.getEmailPassword(),id,mailRepository.findMailById(id));
+    public void deleteMail(User user,long id,int tip){
+        if(tip==2)
+            DeleteMail.deleteSentMail(user.getEmail(),user.getEmailPassword(),id,mailRepository.findMailById(id));
+        else DeleteMail.deleteInboxMail(user.getEmail(),user.getEmailPassword(),id,mailRepository.findMailById(id));
         mailRepository.deleteById(id);
     }
 

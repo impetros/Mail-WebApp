@@ -9,7 +9,7 @@ import javax.mail.search.FlagTerm;
 
 public class DeleteMail
 {
-    public static void deleteMail(String email, String password, long id,Mail mail)
+    public static void deleteSentMail(String email, String password, long id,Mail mail)
     {
         Folder sent;
         /*  Set the mail properties  */
@@ -43,7 +43,6 @@ public class DeleteMail
 
             try
             {
-//                printAllMessages(messages);
                 for (int i = 0, n = messages.length; i < n; i++) {
                     Message message = messages[i];
                     Address[] a;
@@ -81,4 +80,44 @@ public class DeleteMail
         }
     }
 
+    public static void deleteInboxMail(String email, String password, long id,Mail mail) {
+        String from = mail.getOtherEmail();
+        String text = mail.getText();
+        String subject = mail.getSubject();
+        Date date = mail.getDate();
+        try {
+            Properties properties = new Properties();
+            properties.put("mail.store.protocol", "imaps");
+            Session emailSession = Session.getDefaultInstance(properties);
+            Store store = emailSession.getStore();
+            store.connect("pop.gmail.com", email, password);
+
+            Folder emailFolder = store.getFolder("INBOX");
+
+            emailFolder.open(Folder.READ_WRITE);
+
+            Message[] messages = emailFolder.getMessages();
+            System.out.println("messages.length---" + messages.length);
+            for (int i = 0, n = messages.length; i < n; i++) {
+                Message message = messages[i];
+                String from1 = message.getFrom()[0].toString();
+                if (message.getSentDate().equals(date) && CheckingMails.getMessageContent(message).equals(text) && message.getSubject().equals(subject) &&
+                        from1.substring(from1.indexOf("<") + 1, from1.indexOf(">")).equals(from)) {
+                    message.setFlag(Flags.Flag.DELETED, true);
+                    System.out.println("\n\n\n\n\nMerge\n\n\n\n");
+                    break;
+                }
+            }
+
+            emailFolder.close(false);
+            store.close();
+
+        } catch (NoSuchProviderException e) {
+            e.printStackTrace();
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+
+    }
 }
+

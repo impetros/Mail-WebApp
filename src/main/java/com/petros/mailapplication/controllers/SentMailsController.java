@@ -39,8 +39,9 @@ public class SentMailsController {
     }
 
     @GetMapping("/intermediate")
-    public String intermediateInbox(Principal principal,Model model){
-        Set<Mail> mails= com.petros.mailapplication.mail.SentMails.read(principal.getName(),userService.findByEmail(principal.getName()).getEmailPassword(),userService.findByEmail(principal.getName()).getId());
+    public String intermediateInbox(Principal principal){
+        Set<Mail> mails= com.petros.mailapplication.mail.SentMails.read(principal.getName(),userService.findByEmail(principal.getName()).getEmailPassword(),
+                userService.findByEmail(principal.getName()).getId());
         userService.addMails(principal.getName(),mails,2);
         return "redirect:/sentmails";
     }
@@ -50,7 +51,7 @@ public class SentMailsController {
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable long id,Principal principal){
         String username=principal.getName();
-        userService.deleteMail(userService.findByEmail(username),id);
+        userService.deleteMail(userService.findByEmail(username),id,2);
         return "redirect:/sentmails";
     }
 

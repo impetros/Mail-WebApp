@@ -10,8 +10,7 @@ import javax.mail.search.FlagTerm;
 
 public class CheckingMails {
 
-    public static List<Mail>  check(String host, String storeType, String user,
-                                  String password,long id) {
+    public static List<Mail>  check(String host,  String user, String password,long id) {
         List<Mail> mails = new ArrayList<>();
         try {
             Properties properties = new Properties();
